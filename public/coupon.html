@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <title>ボティメンテ ドリンク</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+</head>
+<body>    
+  <header>
+    <div class="banner">
+      <img src="img/header-new-3.png" />
+    </div>
+  </header>
+  <div>
+    <div id="loadingPage">
+      <div class="loader"></div>
+    </div>
+    <div id="couponPage" style="display: none;">
+      <div style="padding: 0px 15px;">
+        <div id="couponNumber">
+          123456
+        </div>
+        <div id="couponInfo">
+          <span style="color: #19AE48;font-weight: 600;">クーポン対象商品：</span>
+          <br>マウントレーニア　マイスターズラテ
+          <br><br><span style="color: #19AE48;font-weight: 600;">クーポン発券期限：</span>
+          <br>2018年11月12日まで
+          <br><br><span style="color: #19AE48;font-weight: 600;">商品引換期限：</span>
+          <br>2018年11月13日まで
+          <br><br><span style="color: #19AE48;font-weight: 600;">交換場所：</span>
+          <br><span id="excLoc">沖縄県を除く、全国のファミリーマート店舗</span>
+          <br><br><span style="color: #19AE48;font-weight: 600;">Famiポート操作手順：</span>
+          <br>※店頭に商品がない場合がございます。ご来店される店舗に商品があることをご確認の上、クーポン券を発券してください。
+          <br><br>以下の手順でファミリーマート店頭のFamiポートで、クーポン券を発券してください。
+          <div class="bullets-wrapper" style="margin: 10px auto;">
+            <ol>
+              <li>Famiポート トップメニュー（トップ画面）で「クーポン券」をタッチ</li>
+              <li>「シリアル番号をお持ちの方はこちら」ボタンをタッチ</li>
+              <li>クーポン発券用シリアル番号を入力</li>
+              <li>サービス内容を確認</li>
+              <li>クーポン券を発券</li>
+              <li>発券したクーポン券とともに対象商品をレジカウンターまでお持ちください。</li>
+            </ol>
+          </div>
+          <br><span style="font-weight: 600;"> 【ご注意事項】 </span>
+          <div class="bullets-wrapper" style="margin: 10px auto;">
+            <ul>
+              <li>沖縄県を除く、全国のファミリーマートでご利用頂けます。サークルＫ・サンクスでは利用できません。</li>
+              <li>ファミリーマート店内のFamiポートでシリアル番号を入力し、クーポン券を発券してください。</li>
+              <li>一部対象商品の取扱いのない店舗もございます。ご来店の際に必ず店舗に商品があるかご確認の上、クーポン券を発券してください。</li>
+              <li>クーポン券1枚で対象商品1点にご利用頂けます。</li>
+              <li>1回のお会計で1枚のみご利用頂けます。</li>
+              <li>他のクーポン券、割引・優待サービスとの併用はできません。</li>
+              <li>現金への換金、汚損・破損・紛失によるクーポン券のお取替え、再発行はできません。</li>
+              <li>有効期限切れや、クーポン券のコピーは無効となります。</li>
+              <li>クーポン券の発行権利はご本人様以外に転売・譲渡できません。</li>
+              <li>ご利用の商品は、お客様の都合による返品はできません。</li>
+              <li>Famiポートクーポンの使い方
+                <br><a href="https://www.famiportcoupon.jp/howto.html" target="_blank" style="font-size: 13px;">https://www.famiportcoupon.jp/howto.html</a>
+              </li>
+            </ul>
+          </div>
+          <br>発券されるクーポン券面の注意事項もお読みくださいますようお願い申し上げます。
+          <br><br><span style="color: #19AE48;font-weight: 600;">キャンペーン事務局：</span>
+            <br>株式会社コンテンツブレイン
+            <br>03-5919-2234 (10:00~18:00)
+            <br>info@contentsbrain.co.jp
+          <br>
+        </div>
+      </div>
+      <div style="margin-bottom: 20px;">
+        商品の感想を下記にコメントください。
+        <br><a href="https://twitter.com/predelistyle" target="_blank">https://twitter.com/predelistyle</a>
+      </div>
+    </div>
+    <div id="surveyPage" style="display: none;">
+      <span style="color: #0193DD; font-size: 16px;">アンケートに答えて商品をGet!
+      <br>抽選で50,000名様に商品をプレゼント</span>
+      <br><br><a href="https://couponcampaign.predelistyle.com/%E3%83%9C%E3%83%87%E3%82%A3%E3%83%A1%E3%83%B3%E3%83%86%E3%83%89%E3%83%AA%E3%83%B3%E3%82%AF/?source=FamilyMart" style="font-size: 14px;">https://couponcampaign.ienomistyle.com/ボディメンテドリンク/</a>
+    </div>
+    <div id="loserPage" style="display: none;">
+      <div id="resultTitle" style="color: red;">残念！</div>
+      <div id="resultDescription">はずれ</div>
+      <div id="resultInstruction" style="font-weight: 500;">ご参加頂きありがとうございました。</div>
+    </div>
+  </div>
+</body>
+</html>
+
+<script type="text/javascript">
+var campaignId = '';
+var adUserId = '4831';
+var rmaId = '';
+var generalUrl = 'https://track.richmediaads.com/a/analytic.htm?rmaId={{rmaId}}&domainId=0&pageLoadId={{cb}}&userId={{adUserId}}&pubUserId=0&campaignId={{campaignId}}&callback=trackSuccess&type={{type}}&value={{value}}&uniqueId={{userId}}&customId={{source}}';
+var trackingUrl = generalUrl.replace('{{rmaId}}', rmaId).replace('{{campaignId}}', campaignId).replace('{{adUserId}}', adUserId).replace('{{cb}}', Date.now().toString());
+
+function getParams() {
+  var query_string = {};
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+      var pair = vars[i].split("=");
+      // If first entry with this name
+      if (typeof query_string[pair[0]] === "undefined") {
+          query_string[pair[0]] = pair[1];
+      // If second entry with this name
+      } else if (typeof query_string[pair[0]] === "string") {
+          var arr = [ query_string[pair[0]], pair[1] ];
+          query_string[pair[0]] = arr;
+      // If third or later entry with this name
+      } else {
+          query_string[pair[0]].push(pair[1]);
+      }
+  } 
+  return query_string;
+}
+
+function trackCouponView(userId, couponCode, source) {
+  if (window.location.hostname.indexOf('localhost') < 0 && window.location.protocol != 'file:') {
+    // var pixel = document.createElement('img');
+    // var type = 'coupon_view'
+    // var src = trackingUrl.replace('{{type}}', type).replace('{{value}}', couponCode).replace('{{userId}}', userId).replace('{{source}}', source);
+    // pixel.src = src;
+    // document.body.appendChild(pixel);
+  }
+}
+
+function showCouponCode(couponCode, source) {
+  document.getElementById('couponNumber').innerHTML = couponCode;
+  document.getElementById('loadingPage').style.display = 'none';
+  document.getElementById('couponPage').style.display = 'block';
+}
+
+function renderFromAPI(userId, source) {
+  if (window.XMLHttpRequest) {
+      xmlhttp = new XMLHttpRequest();
+  } else {
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var response = this.responseText ? JSON.parse(this.responseText) : {};
+      console.log(response);
+      try {
+        if (response.user.couponCode) {
+          showCouponCode(response.user.couponCode, response.user.source);
+          trackCouponView(params.userId, response.user.couponCode, params.source);
+        }
+        else {
+          if (response.user.state == "lose") {
+            document.getElementById('loadingPage').style.display = 'none';
+            document.getElementById('loserPage').style.display = 'block';
+          }
+          else {
+            document.getElementById('loadingPage').style.display = 'none';
+            document.getElementById('surveyPage').style.display = 'block';
+          }
+        }
+      }
+      catch (error) {
+        console.error(error);
+        document.getElementById('loadingPage').style.display = 'none';
+        document.getElementById('surveyPage').style.display = 'block';
+      }
+    }
+    else if (this.readyState == 4 && this.status != 200) {
+      try {
+        var localObj = getLocal(params.source);
+        if (localObj.status == true) {
+          if (localObj.data.id == params.userId && localObj.data.source == params.source) {
+            console.log('render from local');
+            if (localObj.data.state == 'win') {
+              document.getElementById('loadingPage').style.display = 'none';
+              showCouponCode(localObj.data.couponCode, localObj.data.source);
+              trackCouponView(params.userId, localObj.data.couponCode, localObj.data.source);
+            }
+            else if (localObj.data.state == 'lose') {
+              document.getElementById('loadingPage').style.display = 'none';
+              document.getElementById('loserPage').style.display = 'block';
+            }
+            else {
+              document.getElementById('loadingPage').style.display = 'none';
+              document.getElementById('surveyPage').style.display = 'block';
+            }
+          }
+        }
+      } catch(err) {
+        document.getElementById('loadingPage').style.display = 'none';
+        document.getElementById('surveyPage').style.display = 'block';
+      }
+    }
+  };
+
+  xmlhttp.open("GET", 'https://api.mobileads.com/coupons/o2o/user_info?id=' + params.userId + '&source=' + source);
+  xmlhttp.send();
+}
+
+function getLocal(source) {
+  if (window.localStorage.getItem('BodyMainte')) {
+    try {
+      var dataObj = JSON.parse(window.localStorage.getItem('BodyMainte'));
+      if (dataObj[source] && dataObj[source].id) {
+        return {
+          data: dataObj[source],
+          status: true
+        }
+      }
+      else {
+        return {
+          status: false
+        }
+      }
+    }
+    catch(err) {
+      console.error(err);
+      return {
+        status: false
+      }
+    }
+  }
+  else {
+    return {
+      status: false
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var params = getParams();
+  window.params = params;
+  if (params.userId && params.source) {
+    // try {
+    //   var localObj = getLocal();
+    //   if (localObj.status == true) {
+    //     if (localObj.userObj.id == params.userId && localObj.userObj.source == params.source) {
+    //       console.log('1');
+    //       showCouponCode(localObj.userObj.couponCode, localObj.userObj.source);
+    //       // trackCouponView(couponCode, params.userId);
+    //     }
+    //     else {
+    //       console.log('2');
+    //       renderFromAPI(params.userId, params.source);
+    //     }
+    //   }
+    //   else {
+    //     console.log('3');
+    //     renderFromAPI(params.userId, params.source);
+    //   }
+    // } catch(err) {
+    //   console.log('4');
+      renderFromAPI(params.userId, params.source);
+    // }
+  }
+  else {
+    console.log('no params found');
+    document.getElementById('loadingPage').style.display = 'none';
+    document.getElementById('surveyPage').style.display = 'block';
+  }
+});
+</script>
+
+<style type="text/css">
+@media( min-width: 1px) {
+  .banner {
+    height: 65px;
+  }
+
+  #resultTitle {
+    font-size: 24px;
+    margin-top: 20px;
+  }
+
+  #resultDescription, #resultInstruction {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  #resultTitle {
+    font-size: 30px;
+    margin-top: 30px;
+  }
+
+  #resultDescription {
+    font-size: 20px;
+  }
+}
+
+@media( min-width: 996px) {
+  .banner {
+    height: 90px;
+  }
+}
+
+.banner {
+  width: 100%;
+  background-color: #f0fff0;
+  text-align: left;
+/*  background-image: url('../images/header-bg-new.png');*/
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.banner img {
+  height: 100%;
+  display: block;
+  margin: auto;
+}
+
+body {
+  margin: 0px;
+  text-align: center;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: Arial;
+}
+
+#couponNumber {
+  margin: 30px auto 20px;
+  color: #0193DD;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #0193DD;
+  font-size: 28px;
+  max-width: 360px;
+}
+
+#couponInfo {
+  margin: 30px auto 20px;
+  font-size: 14px;
+  padding: 10px;
+  border: 1px solid #19AE48;
+  border-radius: 4px;
+  max-width: 600px;
+  text-align: left;
+  /*font-weight: 600;*/
+}
+
+.bullets-wrapper {
+  margin: auto;
+  max-width: 500px;
+}
+
+.bullets-wrapper ol, .bullets-wrapper ul {
+  text-align: left;
+  margin-top: 0px;
+  padding-left: 20px;
+}
+
+#surveyPage, #loserPage {
+  font-weight: 600;
+  margin-top: 15px;
+  padding: 0px 20px;
+  text-align: center;
+}
+#resultTitle {
+    font-weight: 600;
+    padding: 0px 15px;
+}
+#resultDescription, #resultInstruction {
+    margin-top: 10px;
+    padding: 0px 15px;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loader {
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid #555555;
+  margin: auto;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+}
+
+ .j-list-wrapper {
+  text-align: left;
+}
+
+ .j-list {
+  margin: 5px 0px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+
+ .j-list .j-point {
+   display: inline-block;
+   margin: 0px 5px;
+}
+
+ .j-list .j-text {
+  display: inline-block;
+}
+</style>
