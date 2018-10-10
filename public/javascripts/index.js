@@ -37,7 +37,7 @@ var app = {
 		  return query_string;
 	},
 	generateCouponLink(userId, source) {
-		return 'https://couponcampaign.predelistyle.com/%E3%83%9C%E3%83%87%E3%82%A3%E3%83%A1%E3%83%B3%E3%83%86%E3%83%89%E3%83%AA%E3%83%B3%E3%82%AF/coupon.html?userId=' + userId + '&source=' + source;
+		return 'https://s3.amazonaws.com/rmarepo/o2o/MtRainier/coupon.html?userId=' + userId + '&source=' + source;
 	},
 	initResult(state, couponLink) {
 		if (state == 'win') {
@@ -75,8 +75,10 @@ var app = {
 		winningLogic.process(this.q, !user.isWanderer).then((resultProperties) => {
 			winningLogic.processed = true;
 			console.log(resultProperties);
-			var actualResult = resultProperties.actualResult;
-			var group = resultProperties.group;
+			/*var actualResult = resultProperties.actualResult;
+			var group = resultProperties.group;*/
+			var actualResult = 'win';
+			var group = ['A'];
 			if (!user.isWanderer) {
 				user.mark(user.info.id, actualResult, group, this.params.source).then((response) => {
 					winningLogic.processed = true;
@@ -236,7 +238,7 @@ var app = {
       var regButtons = document.getElementById('regButtons');
       regLoader.style.display = 'block';
       regButtons.style.display = 'none';
-			user.registerTwitter().then((result) => {
+			user.registerTwitter()/*.then((result) => {
         // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
         // You can use these server side with your app's credentials to access the Twitter API.
         user.twitter.token = result.credential.accessToken;
@@ -255,7 +257,7 @@ var app = {
         var credential = error.credential;
         alert(errorMessage);
         // ..
-      });
+      });*/
     };
 
     var followBtn = document.getElementById('followBtn');
@@ -614,7 +616,7 @@ var app = {
 		});
 
 		this.params = this.getParams();
-		this.params.source = 'MtRainier';
+		this.params.source = 'mtRainier';
 		/* init registration form sections */
 		/*this.formSections = new miniPages({
 		  	pageWrapperClass: document.getElementById('formSecWrapper'),

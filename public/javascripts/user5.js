@@ -9,7 +9,8 @@ firebase.initializeApp(firebaseConfig);
 var domain = 'https://www.mobileads.com';
 var apiDomain = 'https://api.mobileads.com';
 
-var functionsDomain = 'https://us-central1-bodymainteo2o-1366e.cloudfunctions.net/twitter';
+var functionsDomain = 'https://us-central1-mtrainier-78bc8.cloudfunctions.net/twitter';
+// var functionsDomain = 'http://localhost:5000/mtrainier-78bc8/us-central1/twitter';
 
 var localStorageName = 'MtRainier';
 
@@ -42,7 +43,7 @@ var user = {
         });
 	},
 	get: function(userId, source) {
-    return axios.get(apiDomain + '/coupons/o2o/user_info', {
+    return axios.get(apiDomain + '/coupons/mtRainier/user_info', {
       params: {
         id: userId,
         source: source
@@ -50,7 +51,7 @@ var user = {
     });
 	},
 	register: function(userId, source) {
-		return axios.post(apiDomain + '/coupons/o2o/user_register?id=' + userId + '&source=' + source + '&fingerprint=' + this.fingerprint);
+		return axios.post(apiDomain + '/coupons/mtRainier/user_register?id=' + userId + '&source=' + source + '&fingerprint=' + this.fingerprint);
 	},
 	trackRegister: function(userId, source) {
     // track as impression
@@ -121,7 +122,7 @@ var user = {
 	mark: function(userId, state, groups, source) {
 		// var groupJSON = JSON.stringify(groups);
 		var groupJSON = groups[0];
-		return axios.post(apiDomain + '/coupons/o2o/mark_user?id=' + userId + '&state=' + state + '&group=' + groupJSON + '&source=' + source);
+		return axios.post(apiDomain + '/coupons/mtRainier/mark_user?id=' + userId + '&state=' + state + '&group=' + groupJSON + '&source=' + source);
 	},
 	trackWin: function(userId, couponCode, source) {
 		if (window.location.hostname.indexOf('localhost') < 0) {

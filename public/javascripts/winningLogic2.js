@@ -46,7 +46,7 @@ var winningLogic = {
     	}
     }
     return new Promise((resolve, reject) => {
-      var groups = ['','A','A']; // array index follow priority. e.g. for win priority 2, the corresponding group has to be groups[2]
+      var groups = ['','A']; // array index follow priority. e.g. for win priority 2, the corresponding group has to be groups[2]
       var group = 'NA';
       var actualResult = 'lose' // result to be stored to db via /mark_user, also shown in result page
       var couponInfo = {};
