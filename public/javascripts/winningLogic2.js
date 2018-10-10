@@ -1,12 +1,8 @@
 var winningLogic = {
 	winLogic: {
-    '1': {
-      value: ['中学生', '高校生', '予備校生', '大学生', '大学院生', '主婦（パート・アルバイト等兼業）', '主婦（専業）', '公務員', '会社員', '自営業', '自由業'],
-      priority: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    },
-    '2': {
-      value: ['同居の家族は居ない。（一人暮らし）', '配偶者', '子供（小学生以下）', '子供（中学生または高校生）', '子供（大学生以上）', '両親'],
-      priority: [2, 2, 2, 2, 2, 2]
+    '3': {
+      value: '週２〜３回以上',
+      priority: [1]
     }
 	},
 	loseLogic: {
@@ -55,9 +51,9 @@ var winningLogic = {
       var actualResult = 'lose' // result to be stored to db via /mark_user, also shown in result page
       var couponInfo = {};
 
-      if (this.eligibility.length < 2) { // must answer q1 AND q2 correctly
+      /*if (this.eligibility.length < 2) { // must answer q1 AND q2 correctly
         winPrio = losePrio
-      }
+      }*/
 
       if (winPrio < losePrio) {
         actualResult = 'win';

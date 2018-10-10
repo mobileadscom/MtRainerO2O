@@ -77,11 +77,6 @@ var app = {
 			console.log(resultProperties);
 			var actualResult = resultProperties.actualResult;
 			var group = resultProperties.group;
-			if (actualResult == 'win') {
-				if (this.params.source == 'CircleK') {
-					group = ['B'];
-				}
-			}
 			if (!user.isWanderer) {
 				user.mark(user.info.id, actualResult, group, this.params.source).then((response) => {
 					winningLogic.processed = true;
