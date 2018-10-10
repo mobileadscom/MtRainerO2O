@@ -416,134 +416,146 @@ var app = {
 		/* ==== Set Questions ==== */
 	  this.q[1] = new singleAnswerQuestion({
 	  	wrapper: document.getElementById('q1'),
-	  	question: '<span class="red">QUESTION 1</span><br>属性・職業について教えてください。',
+	  	question: '<span class="red">QUESTION 1</span><br>性別をお選びください。',
 	  	answers: [{
-	    	value: '中学生',
-	    	text: '中学生',
+	    	value: '男性',
+	    	text: '男性',
 	    }, {
-	    	value: '高校生',
-	    	text: '高校生'
-	    }, {
-	    	value: '予備校生',
-	    	text: '予備校生'
-	    }, {
-	    	value: '大学生',
-	    	text: '大学生'
-	    }, {
-	    	value: '大学院生',
-	    	text: '大学院生'
-	    }, {
-	    	value: '主婦（パート・アルバイト等兼業）',
-	    	text: '主婦（パート・アルバイト等兼業）'
-	    }, {
-	    	value: '主婦（専業）',
-	    	text: '主婦（専業）'
-	    }, {
-	    	value: '公務員',
-	    	text: '公務員'
-	    }, {
-	    	value: '会社員',
-	    	text: '会社員'
-	    }, {
-	    	value: '自営業',
-	    	text: '自営業'
-	    }, {
-	    	value: '自由業',
-	    	text: '自由業'
-	    }, {
-	    	value: '無職',
-	    	text: '無職'
-	    }, {
-	    	text: 'その他',
-	    	type: 'text'
+	    	value: '女性',
+	    	text: '女性'
 	    }],
 	    nextBtn: document.getElementById('toQ2')
 	  });
 	  
-	  this.q[2] = new multipleAnswerQuestion({
+	  this.q[2] = new singleAnswerQuestion({
 	  	wrapper: document.getElementById('q2'),
-	  	question: '<span class="red">QUESTION 2</span><br>同居の家族について教えてください。<br><span style="font-size:14px;color:#222;">複数選択可能</span>',
+	  	question: '<span class="red">QUESTION 2</span><br>年齢をお選びください。',
 	  	answers: [{
-	    	value: '同居の家族は居ない。（一人暮らし）',
-	    	text: '同居の家族は居ない。（一人暮らし）',
+	    	value: '１０代',
+	    	text: '１０代',
 	    }, {
-	    	value: '配偶者',
-	    	text: '配偶者'
+	    	value: '２０代',
+	    	text: '２０代'
 	    }, {
-	    	value: '子供（小学生以下）',
-	    	text: '子供（小学生以下）'
+	    	value: '３０代',
+	    	text: '３０代'
 	    }, {
-	    	value: '子供（中学生または高校生）',
-	    	text: '子供（中学生または高校生）'
+	    	value: '４０代',
+	    	text: '４０代'
 	    }, {
-	    	value: '子供（大学生以上）',
-	    	text: '子供（大学生以上）'
+	    	value: '５０代',
+	    	text: '５０代'
 	    }, {
-	    	value: '両親',
-	    	text: '両親'
-	    }, {
-	    	value: '兄弟姉妹',
-	    	text: '兄弟姉妹'
-	    }, {
-	    	value: '祖父母',
-	    	text: '祖父母'
-	    }, {
-	    	text: 'その他',
-	    	type: 'text'
+	    	value: '６０代以上',
+	    	text: '６０代以上'
 	    }],
 	    nextBtn: document.getElementById('toQ3')
 	  });
 
-	  this.q[3] = new multipleAnswerQuestion({
+	  this.q[3] = new singleAnswerQuestion({
 	  	wrapper: document.getElementById('q3'),
-	  	question: '<span class="red">QUESTION 3</span><br>秋冬の健康対策として、体調維持のために意識的に行っていることを教えてください。<br><span style="font-size:14px;color:#222;">複数選択可能</span>',
+	  	question: '<span class="red">QUESTION 3</span><br>コンビニやスーパーで売られている、市販のコーヒー飲料（ブラック・カフェラテ問わず）をどのくらいの頻度で自分で飲むために購入しますか。',
 	  	answers: [{
-	    	value: 'うがいをする',
-	    	text: 'うがいをする',
+	    	value: '週４回以上',
+	    	text: '週４回以上',
 	    }, {
-	    	value: '手洗いをする',
-	    	text: '手洗いをする'
+	    	value: '週２〜３回以上',
+	    	text: '週２〜３回以上'
 	    }, {
-	    	value: 'マスクの着用',
-	    	text: 'マスクの着用'
+	    	value: '週１回',
+	    	text: '週１回'
 	    }, {
-	    	value: '加湿器を使う',
-	    	text: '加湿器を使う'
+	    	value: '月２〜３回',
+	    	text: '月２〜３回'
 	    }, {
-	    	value: 'バランスのよい食事を心がけている',
-	    	text: 'バランスのよい食事を心がけている'
+	    	value: '月１回',
+	    	text: '月１回'
 	    }, {
-	    	value: '乳酸菌飲料を飲む',
-	    	text: '乳酸菌飲料を飲む'
+	    	value: '２〜３ヶ月に１回',
+	    	text: '２〜３ヶ月に１回'
 	    }, {
-	    	text: 'その他',
-	    	type: 'text'
+	    	value: '半年１回',
+	    	text: '半年１回'
+	    }, {
+	    	value: '半年１回未満',
+	    	text: '半年１回未満'
+	    }, {
+	    	value: '飲まない',
+	    	text: '飲まない'
 	    }],
 	    nextBtn: document.getElementById('toQ4')
 	  });
 	  
 	  this.q[4] = new singleAnswerQuestion({
 	  	wrapper: document.getElementById('q4'),
-	  	question: '<span class="red">QUESTION 4</span><br>体調管理に関する新しい食品や飲料に興味はありますか？',
+	  	question: '<span class="red">QUESTION 4</span><br>普段「マウントレーニア」をどのくらいの頻度で自分で飲むために購入しますか。',
 	  	answers: [{
-	    	value: 'Yes',
-	    	text: 'Yes',
+	    	value: '週４回以上',
+	    	text: '週４回以上',
 	    }, {
-	    	value: 'No',
-	    	text: 'No'
+	    	value: '週２〜３回以上',
+	    	text: '週２〜３回以上'
+	    }, {
+	    	value: '週１回',
+	    	text: '週１回'
+	    }, {
+	    	value: '月２〜３回',
+	    	text: '月２〜３回'
+	    }, {
+	    	value: '月１回',
+	    	text: '月１回'
+	    }, {
+	    	value: '２〜３ヶ月に１回',
+	    	text: '２〜３ヶ月に１回'
+	    }, {
+	    	value: '半年１回',
+	    	text: '半年１回'
+	    }, {
+	    	value: '半年１回未満',
+	    	text: '半年１回未満'
+	    }, {
+	    	value: '飲まない',
+	    	text: '飲まない'
+	    }, {
+	    	value: '知らない',
+	    	text: '知らない'
 	    }],
 	    nextBtn: document.getElementById('toQ5')
 	  });
 
 	  this.q[5] = new singleAnswerQuestion({
 	  	wrapper: document.getElementById('q5'),
-	  	question: '<span class="red">QUESTION 5</span><br>10月9日に新発売のボディメンテ ドリンクは「電解質+乳酸菌Ｂ240」の働きで「飲んでカラダをバリアする」全く新しい飲料です。ご存じでしたか？',
+	  	question: '<span class="red">QUESTION 5</span><br>普段「クラフトボス」をどのくらいの頻度で自分で飲むために購入しますか。',
 	  	answers: [{
-	    	value: 'Yes',
-	    	text: 'Yes',
+	    	value: '週４回以上',
+	    	text: '週４回以上',
 	    }, {
-	    	value: 'No',
-	    	text: 'No'
+	    	value: '週２〜３回以上',
+	    	text: '週２〜３回以上'
+	    }, {
+	    	value: '週１回',
+	    	text: '週１回'
+	    }, {
+	    	value: '月２〜３回',
+	    	text: '月２〜３回'
+	    }, {
+	    	value: '月１回',
+	    	text: '月１回'
+	    }, {
+	    	value: '２〜３ヶ月に１回',
+	    	text: '２〜３ヶ月に１回'
+	    }, {
+	    	value: '半年１回',
+	    	text: '半年１回'
+	    }, {
+	    	value: '半年１回未満',
+	    	text: '半年１回未満'
+	    }, {
+	    	value: '飲まない',
+	    	text: '飲まない'
+	    }, {
+	    	value: '知らない',
+	    	text: '知らない'
 	    }],
 	    nextBtn: document.getElementById('toApply')
 	  });
