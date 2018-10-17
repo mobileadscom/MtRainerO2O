@@ -52,7 +52,7 @@
 
 .miniCheckbox input:checked ~ .checkmark {
     /*background-color: #536D79;*/
-    background-color: #00bd4f;
+    background-color: #603608;
 }
 
 /* Show the checkmark when checked */

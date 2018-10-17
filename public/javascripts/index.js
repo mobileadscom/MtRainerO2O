@@ -75,9 +75,9 @@ var app = {
 		winningLogic.process(this.q, !user.isWanderer).then((resultProperties) => {
 			winningLogic.processed = true;
 			console.log(resultProperties);
-			/*var actualResult = resultProperties.actualResult;
-			var group = resultProperties.group;*/
-			var actualResult = 'win';
+			var actualResult = resultProperties.actualResult;
+			var group = resultProperties.group;
+			// var actualResult = 'win';
 			var group = ['A'];
 			if (!user.isWanderer) {
 				user.mark(user.info.id, actualResult, group, this.params.source).then((response) => {
@@ -93,13 +93,13 @@ var app = {
 							source: this.params.source
 						}, this.params.source);
 						this.initResult('win', couponLink);
-						var message = 'ボディメンテドリンククーポンが当たりました!  ' + couponLink;
+						var message = 'マウントレーニア　マイスターズラテが当たりました!    ' + couponLink;
 						if (user.info.id.indexOf('@') > -1) { // login via email
 				        	var emailContent = '<head><meta charset="utf-8"></head><div style="text-align:center;font-weight:600;color:#FF4244;font-size:28px;">おめでとうございます</div><br><br><div style="text-align:center;font-weight:600;">クーポンが当たりました！</div><a href="' + couponLink + '" target="_blank" style="text-decoration:none;"><button style="display:block;margin:20px auto;margin-bottom:40px;border-radius:5px;background-color:#E54C3C;border:none;color:white;width:200px;height:50px;font-weight:600;">クーポンを受取る</button></a>';
 				        	 user.sendEmail(user.info.id, 'Ienomistyle クーポンキャンペーン', emailContent);
 						}
 						else {
-							user.messageTwitter(message);
+							// user.messageTwitter(message);
 						}
 						// user.passResult(user.info.id, flag, user.info.source, couponInfo.couponLink);
 						// user.trackWin(user.info.id, response.data.couponCode, this.params.source);
@@ -119,13 +119,11 @@ var app = {
 				}).catch((error) => {
 					console.log(error);
 					winningLogic.processed = true;
-					// user.saveLocal(user.info.id, '', 'lose', this.params.source); //rmb allow this back
-					// this.localObj = user.getLocal();
 		  			this.initResult('lose');
 				});
 			}
 			else {
-				this.initResult(actualResult);
+				this.initResult('lose');
 			}	
 		});
 	},
@@ -517,10 +515,10 @@ var app = {
 	    	value: '知らない',
 	    	text: '知らない'
 	    }],
-	    nextBtn: document.getElementById('toQ5')
+	    nextBtn: document.getElementById('toApply')
 	  });
 
-	  this.q[5] = new singleAnswerQuestion({
+	/*  this.q[5] = new singleAnswerQuestion({
 	  	wrapper: document.getElementById('q5'),
 	  	question: '<span class="red">QUESTION 5</span><br>普段「クラフトボス」をどのくらいの頻度で自分で飲むために購入しますか。',
 	  	answers: [{
@@ -555,7 +553,7 @@ var app = {
 	    	text: '知らない'
 	    }],
 	    nextBtn: document.getElementById('toApply')
-	  });
+	  });*/
 	  /* ==== Questions End ==== */
 	},
 	checkRedirection() {
@@ -683,7 +681,7 @@ var app = {
 		        height: vidHeight.toString(),
 		        width: vidWidth.toString(),	
 		        playerVars: {'rel': 0,'showinfo': 0, 'controls': 0, 'playsinline': 1},
-		        videoId: 'gEbVB2cFOIE',
+		        videoId: 'HVEYvj3Hn0c',
 		        events: {
 		            'onStateChange': (event) => {
 			            if (event.data == YT.PlayerState.ENDED) {

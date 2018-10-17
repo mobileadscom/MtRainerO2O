@@ -1,8 +1,20 @@
 var winningLogic = {
 	winLogic: {
+    '1': {
+      value: '男性',
+      priority: [4]
+    },
+    '2': {
+      value: ['３０代', '４０代', '５０代'],
+      priority: [3, 3, 3]
+    },
     '3': {
-      value: '週２〜３回以上',
-      priority: [1]
+      value: ['週４回以上', '週２〜３回以上', '週１回', '月２〜３回'],
+      priority: [2, 2, 2, 2]
+    },
+    '4': {
+      value: ['週１回', '月２〜３回', '月１回', '２〜３ヶ月に１回'],
+      priority: [1, 1, 1, 1]
     }
 	},
 	loseLogic: {
@@ -46,14 +58,14 @@ var winningLogic = {
     	}
     }
     return new Promise((resolve, reject) => {
-      var groups = ['','A']; // array index follow priority. e.g. for win priority 2, the corresponding group has to be groups[2]
+      var groups = ['','A','A', 'A', 'A']; // array index follow priority. e.g. for win priority 2, the corresponding group has to be groups[2]
       var group = 'NA';
       var actualResult = 'lose' // result to be stored to db via /mark_user, also shown in result page
       var couponInfo = {};
 
-      /*if (this.eligibility.length < 2) { // must answer q1 AND q2 correctly
+      if (this.eligibility.length < 4) { // must answer q1 to q4 all correctly
         winPrio = losePrio
-      }*/
+      }
 
       if (winPrio < losePrio) {
         actualResult = 'win';

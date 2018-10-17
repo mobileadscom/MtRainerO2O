@@ -6,7 +6,7 @@
   .campaignInfo {
     max-width: 360px;
     margin: 15px auto;
-    border: 1px solid #19AE48;
+    border: 1px solid #603608;
     border-radius: 2px;
   }
   
@@ -26,7 +26,7 @@
   .campaignInfo {
     max-width: 405px;
     margin: 15px auto;
-    border: 1px solid #19AE48;
+    border: 1px solid #603608;
     border-radius: 2px;
   }
   
@@ -111,7 +111,7 @@
 }
 
 #regButtons button, #submitBtn, #termsPage button {
-  background-color: #00bd4f;
+  background-color: #603608;
   border: none;
   color: white;
   padding: 6px 15px;
@@ -125,5 +125,5 @@
 
 #regButtons button:hover, #submitBtn:hover, #termsPage button:hover {
   cursor: pointer;
-  background-color: #00984f;
+  background-color: #7F470B;
 }

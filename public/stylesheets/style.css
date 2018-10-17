@@ -329,7 +329,7 @@ div {
   border-radius: 2px;
   font-size: 1.25em;
   border: 1px solid transparent;
-  background-color: #00bd4f;
+  background-color: #603608;
   color: white;
   width: 100px;
   height: 34px;
@@ -386,7 +386,7 @@ button .left:after {
 }
 
 button:hover .left:after {
-  border-right: 14px solid black;
+  border-right: 14px solid #F3D62C;
 }
 
 button.next-btn, #startSurvey, #toTerms {
@@ -418,13 +418,11 @@ button .right:after {
 }
 
 button:hover .right:after {
-  border-left: 14px solid black;
+  border-left: 14px solid #F3D62C;
 }
 
 .page .pagination-wrapper button:hover, #toTerms:hover, #startSurvey:hover, #couponLink button:hover {
-  /*color: white;
-  background-color: #E54C3C;*/
-/*  color: white;*/
+  background-color: #7F470B;
   cursor: pointer;
 }
 
@@ -516,7 +514,7 @@ button:hover .right:after {
 #toVideo {
   margin: 20px;
   margin-bottom: 5px;
-  background-color: #00bd4f;
+  background-color: #603608;
   border: none;
   color: white;
   padding: 6px 15px;
@@ -526,7 +524,7 @@ button:hover .right:after {
 
 #toVideo:hover {
   cursor: pointer;
-  background-color: #00984f;
+  background-color: #7F470B;
 }
 
 .vid-wrapper {

@@ -62,8 +62,7 @@
 	transition: all 0.3s;
 	width: 12px;
 	height: 12px;
-	background-color: #00bd4f;
-  /*background-color: #3872da;*/
+	background-color: #603608;
 	position: absolute;
 	left: 9px;
 	top: 50%;
@@ -91,7 +90,7 @@
 
 .answer.selected:before {
   /*border-color: #3872da;*/
-  border-color: #00bd4f;
+  border-color: #603608;
 }
 
 .m-answer.selected:before {
@@ -99,8 +98,8 @@
   background-color: #536D79;*/
   /*border-color: #3872da;
   background-color: #3872da;*/
-  border-color: #00bd4f;
-  background-color: #00bd4f;
+  border-color: #603608;
+  background-color: #603608;
 }
 
 .answer.selected .rad, .m-answer.selected .checkmark {
