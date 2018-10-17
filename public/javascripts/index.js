@@ -454,8 +454,8 @@ var app = {
 	    	value: '週４回以上',
 	    	text: '週４回以上',
 	    }, {
-	    	value: '週２〜３回以上',
-	    	text: '週２〜３回以上'
+	    	value: '週２〜３回',
+	    	text: '週２〜３回'
 	    }, {
 	    	value: '週１回',
 	    	text: '週１回'
@@ -469,11 +469,11 @@ var app = {
 	    	value: '２〜３ヶ月に１回',
 	    	text: '２〜３ヶ月に１回'
 	    }, {
-	    	value: '半年１回',
-	    	text: '半年１回'
+	    	value: '半年に１回',
+	    	text: '半年に１回'
 	    }, {
-	    	value: '半年１回未満',
-	    	text: '半年１回未満'
+	    	value: '半年に１回未満',
+	    	text: '半年に１回未満'
 	    }, {
 	    	value: '飲まない',
 	    	text: '飲まない'
@@ -488,8 +488,8 @@ var app = {
 	    	value: '週４回以上',
 	    	text: '週４回以上',
 	    }, {
-	    	value: '週２〜３回以上',
-	    	text: '週２〜３回以上'
+	    	value: '週２〜３回',
+	    	text: '週２〜３回'
 	    }, {
 	    	value: '週１回',
 	    	text: '週１回'
@@ -503,11 +503,11 @@ var app = {
 	    	value: '２〜３ヶ月に１回',
 	    	text: '２〜３ヶ月に１回'
 	    }, {
-	    	value: '半年１回',
-	    	text: '半年１回'
+	    	value: '半年に１回',
+	    	text: '半年に１回'
 	    }, {
-	    	value: '半年１回未満',
-	    	text: '半年１回未満'
+	    	value: '半年に１回未満',
+	    	text: '半年に１回未満'
 	    }, {
 	    	value: '飲まない',
 	    	text: '飲まない'
@@ -518,15 +518,15 @@ var app = {
 	    nextBtn: document.getElementById('toApply')
 	  });
 
-	/*  this.q[5] = new singleAnswerQuestion({
+	  this.q[5] = new singleAnswerQuestion({
 	  	wrapper: document.getElementById('q5'),
-	  	question: '<span class="red">QUESTION 5</span><br>普段「クラフトボス」をどのくらいの頻度で自分で飲むために購入しますか。',
+	  	question: '<span class="red">QUESTION 5</span><br>普段「ペットボトル入りコーヒー（500ml 前後サイズ）」をどのくらいの頻度で自分で飲むために購入しますか。',
 	  	answers: [{
 	    	value: '週４回以上',
 	    	text: '週４回以上',
 	    }, {
-	    	value: '週２〜３回以上',
-	    	text: '週２〜３回以上'
+	    	value: '週２〜３回',
+	    	text: '週２〜３回'
 	    }, {
 	    	value: '週１回',
 	    	text: '週１回'
@@ -540,11 +540,11 @@ var app = {
 	    	value: '２〜３ヶ月に１回',
 	    	text: '２〜３ヶ月に１回'
 	    }, {
-	    	value: '半年１回',
-	    	text: '半年１回'
+	    	value: '半年に１回',
+	    	text: '半年に１回'
 	    }, {
-	    	value: '半年１回未満',
-	    	text: '半年１回未満'
+	    	value: '半年に１回未満',
+	    	text: '半年に１回未満'
 	    }, {
 	    	value: '飲まない',
 	    	text: '飲まない'
@@ -553,7 +553,7 @@ var app = {
 	    	text: '知らない'
 	    }],
 	    nextBtn: document.getElementById('toApply')
-	  });*/
+	  });
 	  /* ==== Questions End ==== */
 	},
 	checkRedirection() {

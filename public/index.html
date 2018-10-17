@@ -1,6 +1,51 @@
 <!DOCTYPE html>
 <html lang="jp">
 <head>
+	<script type="text/javascript">
+		function queryParams() {
+			  var query_string = {};
+			  var query = window.location.search.substring(1);
+			  var vars = query.split("&");
+			  for (var i=0;i<vars.length;i++) {
+			      var pair = vars[i].split("=");
+			      // If first entry with this name
+			      if (typeof query_string[pair[0]] === "undefined") {
+			          query_string[pair[0]] = pair[1];
+			      // If second entry with this name
+			      } else if (typeof query_string[pair[0]] === "string") {
+			          var arr = [ query_string[pair[0]], pair[1] ];
+			          query_string[pair[0]] = arr;
+			      // If third or later entry with this name
+			      } else {
+			          query_string[pair[0]].push(pair[1]);
+			      }
+			  } 
+			  return query_string;
+		}
+
+		/*if (window.location.hostname.indexOf('localhost')) {
+			var qparams = queryParams();
+			var campaignId = '';
+			var adUserId = '';
+			var rmaId = '';
+			var generalUrl = 'https://track.richmediaads.com/a/analytic.htm?rmaId={{rmaId}}&domainId=0&pageLoadId={{cb}}&userId={{adUserId}}&pubUserId=0&campaignId={{campaignId}}&callback=trackSuccess&type={{type}}&value={{value}}&uniqueId={{userId}}&customId={{source}}';
+			var trackingUrl = generalUrl.replace('{{rmaId}}', rmaId).replace('{{campaignId}}', campaignId).replace('{{adUserId}}', adUserId).replace('{{cb}}', Date.now().toString());
+		    var pixel = document.createElement('img');
+		    var type = 'imp'
+		    var src = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{userId}}','')
+		    if (qparams.source == 'FamilyMart') {
+		    	src = src.replace('{{source}}', 'FamilyMart');
+		    }
+		    else if (qparams.source == 'Circleksunkus') {
+		    	src = src.replace('{{source}}', 'CircleK');
+		    }
+		    else {
+		    	src = src.replace('{{source}}', 'error');
+		    }
+		    pixel.src = src;
+		    document.head.appendChild(pixel);
+		}*/
+	</script>
 	<!-- Google Tag Manager -->
 <!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -226,7 +271,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	  	</div>
 	  	<div class="pagination-wrapper">
 	      <div class="question-no">
-	        1/4
+	        1/5
 	    	</div>
 	      <button id="toQ2" class="pageBtn next-btn saveQuestion" data-question="1" data-target="page2">NEXT <span class="right"></span></button>
 	  	</div>
@@ -237,7 +282,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	  	<div class="pagination-wrapper">
 	  		<button id="toQ1" class="pageBtn back-btn" data-target="page1">BACK <span class="left"></span></button>
 	      <div class="question-no">
-	        2/4
+	        2/5
 	    	</div>
 	      <button id="toQ3" class="pageBtn next-btn saveQuestion" data-question="2" data-target="page3">NEXT <span class="right"></span></button>
 	  	</div>
@@ -248,7 +293,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	  	<div class="pagination-wrapper">
 	  		<button id="toQ2" class="pageBtn back-btn" data-target="page2">BACK <span class="left"></span></button>
 	      <div class="question-no">
-	        3/4
+	        3/5
 	    	</div>
 	      <button id="toQ4" class="pageBtn next-btn saveQuestion" data-question="3" data-target="page4">NEXT <span class="right"></button>
 	  	</div>
@@ -259,12 +304,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	  	<div class="pagination-wrapper">
 	  		<button id="toQ3" class="pageBtn back-btn" data-target="page3">BACK <span class="left"></span></button>
 	      <div class="question-no">
-	        4/4
+	        4/5
 	    	</div>
-	      <button id="toApply" class="pageBtn next-btn saveQuestion" data-question="4" data-target="applyPage">NEXT <span class="right"></span></button>
+	      <button id="toQ5" class="pageBtn next-btn saveQuestion" data-question="4" data-target="page5">NEXT <span class="right"></span></button>
 	  	</div>
 	  </div>
-	  <!-- <div id="page5" class="page">
+	  <div id="page5" class="page">
 	  	<div id="q5" class="pageQuestion">
 	  	</div>
 	  	<div class="pagination-wrapper">
@@ -274,7 +319,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	    	</div>
 	      <button id="toApply" class="pageBtn next-btn saveQuestion" data-question="5" data-target="applyPage">NEXT <span class="right"></span></button>
 	  	</div>
-	  </div> -->
+	  </div>
 	  <div id="applyPage" class="page">
 	  	<div class="msg-wrapper">
 	      アンケートにご協力頂きありがとうございました。
@@ -292,7 +337,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	    	</div>
 		    </div>
 		  <div class="pagination-wrapper">
-				<button class="pageBtn back-btn" data-target="page4">BACK <span class="left"></span></button>
+				<button class="pageBtn back-btn" data-target="page5">BACK <span class="left"></span></button>
 		  </div>
 	  </div>
 	  <div id="videoPage" class="page">
@@ -337,14 +382,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					<div class="bullets-wrapper">
 						<ol>
 							<li>Famiポート トップメニュー（トップ画面）で「クーポン券」にタッチ</li>
-							<li>シリアル番号をお持ちの方はこちら」ボタンをタッチ</li>
+							<li>「シリアル番号をお持ちの方はこちら」ボタンをタッチ</li>
 							<li>クーポン発券用シリアル番号を入力</li>
 							<li>サービス内容を確認</li>
 							<li>クーポン券を発券</li>
 							<li>クーポン券と対象商品をレジカウンターまでお持ちください。</li>
 						</ol>
 					</div>
-					<span style="color: #603608;">キャンペーンサイト記載問い合わせ窓口：</span>
+					<span style="color: #603608;">キャンペーン事務局：</span>
 						<br>株式会社コンテンツブレイン
 						<br>サポート対応時間：10:00-18:00
 						<br>03-5919-2234
