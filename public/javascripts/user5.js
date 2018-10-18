@@ -2,7 +2,6 @@ import axios from 'axios';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import firebaseConfig from './firebaseConfig';
-import Fingerprint2 from 'fingerprintjs2';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -10,7 +9,6 @@ var domain = 'https://www.mobileads.com';
 var apiDomain = 'https://api.mobileads.com';
 
 var functionsDomain = 'https://us-central1-mtrainier-78bc8.cloudfunctions.net/twitter';
-// var functionsDomain = 'http://localhost:5000/mtrainier-78bc8/us-central1/twitter';
 
 var localStorageName = 'MtRainier';
 
@@ -35,13 +33,6 @@ var user = {
 		state: '-',
 		source: '',
 	},
-	fingerprint:'',
-	generateFingerPrint() {
-		new Fingerprint2().get((result, components) => {
-			this.fingerprint = result;
-	        return result;
-        });
-	},
 	get: function(userId, source) {
     return axios.get(apiDomain + '/coupons/mtRainier/user_info', {
       params: {
@@ -51,19 +42,177 @@ var user = {
     });
 	},
 	register: function(userId, source) {
-		return axios.post(apiDomain + '/coupons/mtRainier/user_register?id=' + userId + '&source=' + source + '&fingerprint=' + this.fingerprint);
+		return axios.post(apiDomain + '/coupons/mtRainier/user_register?id=' + userId + '&source=' + source + '&fingerprint=' + userId);
 	},
-	trackRegister: function(userId, source) {
+	trackFirstImp: function(source) {
+		if (window.location.hostname.indexOf('localhost') < 0) {
+			var localObj = this.getLocal(source);
+			var type = 'imp_new';
+			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
+			if (localObj.status == true) {
+				url = url.replace('{{userId}}', localObj.data.id);
+			}
+			else {
+				url = url.replace('{{userId}}', '');
+			}
+			// console.log(url);
+			return axios.get(url);
+		}
+	},
+	trackSecondImp: function(source) {
+		if (window.location.hostname.indexOf('localhost') < 0) {
+			var localObj = this.getLocal(source);
+			var type = 'imp_2_new';
+			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
+			if (localObj.status == true) {
+				url = url.replace('{{userId}}', localObj.data.id);
+			}
+			else {
+				url = url.replace('{{userId}}', '');
+			}
+			// console.log(url);
+			return axios.get(url);
+		}
+	},
+	trackTermsPage: function(source) {
+		if (window.location.hostname.indexOf('localhost') < 0) {
+			var localObj = this.getLocal(source);
+			var type = 'imp_tnc_new';
+			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
+			if (localObj.status == true) {
+				url = url.replace('{{userId}}', localObj.data.id);
+			}
+			else {
+				url = url.replace('{{userId}}', '');
+			}
+			// console.log(url);
+			return axios.get(url);
+		}
+	},
+	trackRegistrationPage: function(source) {
+		if (window.location.hostname.indexOf('localhost') < 0) {
+			var localObj = this.getLocal(source);
+			var type = 'register_new';
+			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
+			if (localObj.status == true) {
+				url = url.replace('{{userId}}', localObj.data.id);
+			}
+			else {
+				url = url.replace('{{userId}}', '');
+			}
+			// console.log(url);
+			return axios.get(url);
+		}
+	},
+	trackTwitterAlreadyFollow: function(source) {
+		if (window.location.hostname.indexOf('localhost') < 0) {
+			var localObj = this.getLocal(source);
+			var type = 'twitter_followed_new';
+			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
+			if (localObj.status == true) {
+				url = url.replace('{{userId}}', localObj.data.id);
+			}
+			else {
+				url = url.replace('{{userId}}', '');
+			}
+			// console.log(url);
+			return axios.get(url);
+		}
+	},
+	trackTwitterFollowPage: function(source) {
+		if (window.location.hostname.indexOf('localhost') < 0) {
+			var localObj = this.getLocal(source);
+			var type = 'imp_twf_new';
+			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
+			if (localObj.status == true) {
+				url = url.replace('{{userId}}', localObj.data.id);
+			}
+			else {
+				url = url.replace('{{userId}}', '');
+			}
+			// console.log(url);
+			return axios.get(url);
+		}
+	},
+	trackTwitterLoginClick: function(source) {
+		if (window.location.hostname.indexOf('localhost') < 0) {
+			var localObj = this.getLocal(source);
+			var type = 'twitter_click_new';
+			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
+			if (localObj.status == true) {
+				url = url.replace('{{userId}}', localObj.data.id);
+			}
+			else {
+				url = url.replace('{{userId}}', '');
+			}
+			// console.log(url);
+			return axios.get(url);
+		}
+	},
+	trackEmailLogin: function(userId, source) {
+		if (window.location.hostname.indexOf('localhost') < 0) {
+			var type = 'email_link';
+			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{userId}}', userId).replace('{{source}}', source);
+			// console.log(url);
+			return axios.get(url);
+		}
+	},
+	trackEmailLoginClick: function(source) {
+		if (window.location.hostname.indexOf('localhost') < 0) {
+			var localObj = this.getLocal(source);
+			var type = 'email_click_new';
+			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
+			if (localObj.status == true) {
+				url = url.replace('{{userId}}', localObj.data.id);
+			}
+			else {
+				url = url.replace('{{userId}}', '');
+			}
+			// console.log(url);
+			return axios.get(url);
+		}
+	},
+	trackTwitterFollowClick: function(source) {
+		if (window.location.hostname.indexOf('localhost') < 0) {
+			var localObj = this.getLocal(source);
+			var type = 'follow_click_new';
+			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
+			if (localObj.status == true) {
+				url = url.replace('{{userId}}', localObj.data.id);
+			}
+			else {
+				url = url.replace('{{userId}}', '');
+			}
+			// console.log(url);
+			return axios.get(url);
+		}
+	},
+	trackExist: function(userId, source, retrievedFingerprint) {
+		if (window.location.hostname.indexOf('localhost') < 0) {
+			var type = 'exist_new';
+			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', retrievedFingerprint + '_' + userId).replace('{{userId}}', userId).replace('{{source}}', source);
+			// console.log(url);
+			return axios.get(url);
+		}
+	},
+	trackRegister: function(userId, source, method) {
     // track as impression
 	    if (window.location.hostname.indexOf('localhost') < 0) {
-		    var type = 'page_view';
+	    	var type = 'page_view';
+	    	if (method == 'twitter') {
+	    		type = 'page_view_tw';
+	    	}
+	    	else if (method == 'email') {
+	    		type = 'page_view_email';
+	    	}
 			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{userId}}', userId).replace('{{source}}', source);
+			// console.log(url);
 			return axios.get(url);
 	    }
 	},
 	sendEmail: function(email, subjectTitle, content) {
   	var formData = new FormData();
-    formData.append('sender', 'Couponcampaign.ienomistyle.com');
+    formData.append('sender', 'couponcampaign@ienomistyle.com');
     formData.append('subject', subjectTitle);
     formData.append('recipient', email);
     formData.append('content', content);
@@ -78,7 +227,7 @@ var user = {
 		firebase.auth().languageCode = 'ja';
 		var provider = new firebase.auth.TwitterAuthProvider();
 	  // return firebase.auth().signInWithPopup(provider);
-	  firebase.auth().signInWithRedirect(provider);
+		firebase.auth().signInWithRedirect(provider);
 	},
 	getRedirectResult: function() {
 		return new Promise(function(resolve, reject) {

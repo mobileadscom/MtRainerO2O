@@ -16,6 +16,7 @@ var app = {
 	params: {}, // params in query string
 	q: [], // array of questions
 	player: null, //youtube player
+	registering: false, // email registration process running
 	getParams: function() {
 		  var query_string = {};
 		  var query = window.location.search.substring(1);
@@ -132,6 +133,10 @@ var app = {
 		var userAnswers = localObj.status == true ? localObj.data.answers : [];
 		var noQuestionAnswered = userAnswers.length - 1;
 
+		if (localObj.data.id.indexOf('@') > -1) {
+			// user.trackEmailLogin(localObj.data.id, this.params.source);
+		}
+
 		/*apply answer to answered question */
 		for (var w = 1; w < this.q.length; w++) {
 			if (userAnswers[w]) {
@@ -187,47 +192,54 @@ var app = {
 	    }
 	  }
 
-		/* email registration */
-	  /*var form = document.getElementById('regForm');
-	  form.onsubmit = (event) => {
-	    var spinner = document.getElementById('formWorking');
-	    var donePage = document.getElementById('doneSec');
-	    var regPage = document.getElementById('regSec');
-		  form.style.display = 'none';
-	    spinner.style.display = 'block';
-      event.preventDefault();
-      var email = document.getElementById('emailInput').value;
-			user.register(email, this.params.source).then((response) => {
-				console.log(response);
-        spinner.style.display = 'none';
-        if (response.data.status == true) {
-        	this.formSections.toPage('doneSec');
-        	// var emailContent = '<head><meta charset="utf-8"></head>ご登録ありがとうございました。下記にあるリンクをクリックしてください。その後キャンペーンへの参加をお願いします<br><br><a href="https://couponcampaign.ienomistyle.com/ボディメンテドリンク/?userId=' + email + '" target="_blank">https://couponcampaign.ienomistyle.com/ボディメンテドリンク/?userId=' + email + '</a>';
-        	var emailContent = '<head><meta charset="utf-8"></head>ご登録ありがとうございました。下記にあるリンクをクリックしてください。その後キャンペーンへの参加をお願いします<br><br><a href="https://s3.amazonaws.com/rmarepo/o2o/ボディメンテドリンク/index.html?userId=' + email + '" target="_blank">https://s3.amazonaws.com/rmarepo/o2o/ボディメンテドリンク/index.html?userId=' + email + '</a>';
-        	user.sendEmail(email, 'Ienomistyle クーポンキャンペーン', emailContent);
-        	// user.trackRegister(email);
-        }
-        else if (response.data.message == 'user exist.') {
-        	user.info = response.data.user;
-        	user.isWanderer = false;
-        	if (window.localStorage.getItem('bmAnswers')) { // for single user per browser
-						user.loadLocal();
-					}
-					else {
-						user.saveLocal(response.data.user.id, response.data.user.couponCode, response.data.user.state); 
-					}
-					user.info.source = this.params.source;
-        	this.enableSaveAnswer();
-        	this.continue();
-					modal.closeAll();
-        }
+	/* email registration */
+	/*var form = document.getElementById('regForm');
 
+	form.onsubmit = (event) => {
+		if (!this.registering) {
+			this.registering = true;
+			var spinner = document.getElementById('formWorking');
+			var donePage = document.getElementById('doneSec');
+			var regPage = document.getElementById('regSec');
+			form.style.display = 'none';
+			spinner.style.display = 'block';
+			event.preventDefault();
+			var email = document.getElementById('emailInput').value;
+			user.register(email, this.params.source).then((response) => {
+				this.registering = false;
+				console.log(response);
+				spinner.style.display = 'none';
+				if (response.data.status == true) {
+					this.formSections.toPage('doneSec');
+					// var emailContent = '<head><meta charset="utf-8"></head>ご登録ありがとうございました。下記にあるリンクをクリックしてください。その後キャンペーンへの参加をお願いします<br><br><a href="https://couponcampaign.ienomistyle.com/ボディメンテドリンク/?userId=' + email + '" target="_blank">https://couponcampaign.ienomistyle.com/ボディメンテドリンク/?userId=' + email + '</a>';
+					var emailContent = '<head><meta charset="utf-8"></head>ご登録ありがとうございました。下記にあるリンクをクリックしてください。その後キャンペーンへの参加をお願いします<br><br><a href="https://s3.amazonaws.com/rmarepo/o2o/MtRainier/index.html?userId=' + email + '" target="_blank">https://s3.amazonaws.com/rmarepo/o2o/MtRainier/index.html?userId=' + email + '</a>';
+					user.sendEmail(email, 'Ienomistyle クーポンキャンペーン', emailContent);
+					// user.trackRegister(email, this.params.source, 'email');
+				}
+				else if (response.data.message == 'user exist.') {
+					user.info.source = this.params.source;
+					user.isWanderer = false;
+					console.log('exist!');
+					user.saveLocal({
+						id: response.data.user.id,
+						couponCode: response.data.user.couponCode,
+						state: response.data.user.state,
+						source: response.data.user.source,
+						timestamp: Date.now()
+					}, response.data.user.source);
+					user.loadLocal(response.data.user.source);
+					this.enableSaveAnswer();
+					this.continue();
+					modal.closeAll();
+				}
 			}).catch((error) => {
 				console.log(error);
+				this.registering = false;
 				form.style.display = 'block';
-        spinner.style.display = 'none';
+				spinner.style.display = 'none';
 			});
-    };*/
+		}
+	};*/
 
     /* twitter registration / login */
     var twitReg = document.getElementById('regTwitter');
@@ -236,7 +248,11 @@ var app = {
       var regButtons = document.getElementById('regButtons');
       regLoader.style.display = 'block';
       regButtons.style.display = 'none';
-			user.registerTwitter()/*.then((result) => {
+      // user.trackTwitterLoginClick(this.params.source);
+      setTimeout(() => {
+			user.registerTwitter()
+		}, 1000);
+			/*.then((result) => {
         // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
         // You can use these server side with your app's credentials to access the Twitter API.
         user.twitter.token = result.credential.accessToken;
@@ -261,6 +277,7 @@ var app = {
     var followBtn = document.getElementById('followBtn');
     followBtn.onclick = () => {
     	followBtn.style.display = 'none';
+    	// user.trackTwitterFollowClick(this.params.source);
     	user.followTwitter().then((response) => {
 				console.log(response);
 	        if (response.data == 'followed!') {
@@ -285,17 +302,36 @@ var app = {
 			// this.player.play();
 		}, 300);
     });
+
+    document.getElementById('toTerms2').addEventListener('click', () => {
+    	setTimeout(() => {
+			// user.trackTermsPage(this.params.source);
+    	}, 300);
+    });
+
+    document.getElementById('startSurvey').addEventListener('click', () => {
+    	setTimeout(() => {
+			// user.trackRegistrationPage(this.params.source);
+    	}, 300);
+    })
+    /*document.getElementById('regEmail').addEventListener('click', () => {
+		setTimeout(() => {
+			// user.trackEmailLoginClick(this.params.source);
+		});
+    });*/
 	  /* ==== Event Listeners End ==== */
 	},
 	checkTwitter: function() { // Check if user is following official page
 		user.isFollowingTwitter().then((resp) => {
-      console.log(resp);
-      if (resp.data == 'following') {
-				this.continue();
-      }
-      else {
-		     this.pages.toPage('followPage');
-      }
+		console.log(resp);
+		if (resp.data == 'following') {
+			// user.trackTwitterAlreadyFollow(this.params.source);
+			this.continue();
+	    }
+		else {
+			this.pages.toPage('followPage');
+			// user.trackTwitterFollowPage(this.params.source);
+	    }
     }).catch((error) => {
       console.log(error);
       document.getElementById('regWorking').style.display = 'none';
@@ -314,10 +350,6 @@ var app = {
 						user.info.source = this.params.source;
 						if (res.data.message == 'user exist.') {
 							console.log('exist!');
-							// user.info.id = res.data.user.id;
-							// user.info.couponCode = res.data.user.couponCode;
-							// user.info.state = res.data.user.state;
-							// user.saveLocal(res.data.user.id, res.data.user.couponCode, res.data.user.state, res.data.user.source);
 							user.saveLocal({
 								id: res.data.user.id,
 								couponCode: res.data.user.couponCode,
@@ -328,9 +360,8 @@ var app = {
 						}
 						else {
 							console.log('not exist');
-							// user.info.id = userId;
-							// user.saveLocal(userId, '', '-', this.params.source); // for single user per browser
-							// user.trackRegister(userId, this.params.source);
+							var method = isTwitter ? 'twitter' : 'email';
+							// user.trackRegister(userId, this.params.source, method);
 							user.saveLocal({
 								id: userId,
 								couponCode: '',
@@ -358,6 +389,9 @@ var app = {
 		    	}
 	    	}
 	    	else { // user is registered
+	    		if (userId.indexOf('@') < 0) {
+	    			// user.trackExist(userId, this.params.source, response.data.user.fingerprint);
+	    		}
 	    		user.isWanderer = false;
 				user.info = response.data.user;
 				user.info.source = response.data.user.source;
@@ -578,6 +612,7 @@ var app = {
 		if (localObj.status == true && localObj.data.source == this.params.source) { // this browser already have user
 			user.isWanderer = false;
 			user.loadLocal(this.params.source);
+			// user.trackSecondImp(this.params.source);
 			this.enableSaveAnswer();
 			this.continue();
 		}
@@ -616,11 +651,11 @@ var app = {
 		this.params = this.getParams();
 		this.params.source = 'mtRainier';
 		/* init registration form sections */
-		/*this.formSections = new miniPages({
+		this.formSections = new miniPages({
 		  	pageWrapperClass: document.getElementById('formSecWrapper'),
 		  	pageClass: 'sec',
 		  	initialPage: document.getElementById('regSec')
-		});*/
+		});
     
 	    this.setQuestions();
 	    this.events();
@@ -629,7 +664,7 @@ var app = {
 		// miniSelect.init('miniSelect');
 
 		/* User Info */
-		if (this.params.userId) {
+		if (this.params.reset) {
 		  	user.clearLocal(this.params.source);
 		}
 
@@ -760,9 +795,8 @@ var app = {
 
 document.addEventListener('DOMContentLoaded', function() {
 	setTimeout(() => {
-		user.generateFingerPrint();
 		app.init();
-		modal.init();
+		// modal.init();
 		window.q = app.q;
 		window.params = app.params;
 	}, 500);

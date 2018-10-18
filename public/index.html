@@ -32,16 +32,7 @@
 			var trackingUrl = generalUrl.replace('{{rmaId}}', rmaId).replace('{{campaignId}}', campaignId).replace('{{adUserId}}', adUserId).replace('{{cb}}', Date.now().toString());
 		    var pixel = document.createElement('img');
 		    var type = 'imp'
-		    var src = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{userId}}','')
-		    if (qparams.source == 'FamilyMart') {
-		    	src = src.replace('{{source}}', 'FamilyMart');
-		    }
-		    else if (qparams.source == 'Circleksunkus') {
-		    	src = src.replace('{{source}}', 'CircleK');
-		    }
-		    else {
-		    	src = src.replace('{{source}}', 'error');
-		    }
+		    var src = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{userId}}','').replace('{{source}}', 'MtRainier')
 		    pixel.src = src;
 		    document.head.appendChild(pixel);
 		}*/
@@ -58,6 +49,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta charset="utf-8">
 </head>
 <body>
+	<!-- <noscript>
+		<img src="https://track.richmediaads.com/a/analytic.htm?rmaId=&domainId=0&pageLoadId=12345&userId=&pubUserId=0&campaignId=&callback=trackSuccess&type=imp_nojs_new&value=&uniqueId=&customId="  border="0" width="0x" height="0" style="display:none;visibility:hidden"/>
+	</noscript> -->
 	<!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5FWB9JK"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
