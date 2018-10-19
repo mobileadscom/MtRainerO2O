@@ -114,7 +114,7 @@ app.post('/checkFriendship', function(req, res) {
 
 app.post('/adminLogIn', function(req, res) {
   if (req.body.username && req.body.password) {
-    if (req.body.username == 'BodyMainteAdmin' && req.body.password == 'BodyMainte987654!') {
+    if (req.body.username == 'MtRainierAdmin' && req.body.password == 'MtRainier987654!') {
       res.json({
         authorized: true,
         message: 'success',
@@ -124,10 +124,10 @@ app.post('/adminLogIn', function(req, res) {
     }
     else {
       var err = {};
-      if (req.body.username != 'BodyMainteAdmin') {
+      if (req.body.username != 'MtRainierAdmin') {
         err.username = 'Incorrect username';
       }
-      if (req.body.password != 'BodyMainte987654!') {
+      if (req.body.password != 'MtRainier987654!') {
         err.password = 'Incorrect password';
       }
       res.json({
