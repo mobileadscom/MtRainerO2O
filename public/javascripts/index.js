@@ -57,7 +57,7 @@ var app = {
 			if (couponLink) {
 				document.getElementById('couponLoader').style.display = 'none';
 				document.getElementById('couponLink').href = couponLink;
-				document.getElementById('couponLink').setAttribute('target', '_blank');
+				// document.getElementById('couponLink').setAttribute('target', '_blank');
 				document.getElementById('getCoupon').innerText = 'クーポンを受け取る';
 			}
 		}
@@ -86,7 +86,6 @@ var app = {
 					console.log(response)
 					if (response.data.couponCode) {
 						var couponLink = this.generateCouponLink(user.info.id, this.params.source);
-						// user.saveLocal(user.info.id, response.data.couponCode, 'win', this.params.source);
 						user.saveLocal({
 							id: user.info.id,
 							couponCode: response.data.couponCode,
@@ -106,7 +105,6 @@ var app = {
 						// user.trackWin(user.info.id, response.data.couponCode, this.params.source);
 					}
 					else {
-						// user.saveLocal(user.info.id, '', 'lose', this.params.source);
 						// user.trackLose(user.info.id, this.params.source);
 						user.saveLocal({
 							id: user.info.id,
@@ -133,7 +131,7 @@ var app = {
 		var userAnswers = localObj.status == true ? localObj.data.answers : [];
 		var noQuestionAnswered = userAnswers.length - 1;
 
-		if (localObj.data.id.indexOf('@') > -1) {
+		if (localObj.status == true && localObj.data.id.indexOf('@') > -1) {
 			// user.trackEmailLogin(localObj.data.id, this.params.source);
 		}
 
@@ -183,14 +181,14 @@ var app = {
 	  // });
 	  
 	  /* enable start survey button when terms agree checkbox is checked */
-	  document.getElementById('agreeCheck').onchange = function() {
+	 /* document.getElementById('agreeCheck').onchange = function() {
 	    if (this.checked) {
 				document.getElementById('startSurvey').disabled = false;
 	    }
 	    else {
 	    	document.getElementById('startSurvey').disabled = true;
 	    }
-	  }
+	  }*/
 
 	/* email registration */
 	/*var form = document.getElementById('regForm');
@@ -304,8 +302,10 @@ var app = {
     });
 
     document.getElementById('toTerms2').addEventListener('click', () => {
+    	document.getElementById('tnc').style.display = 'none';
     	setTimeout(() => {
 			// user.trackTermsPage(this.params.source);
+			// user.trackRegistrationPage(this.params.source);
     	}, 300);
     });
 
@@ -355,7 +355,7 @@ var app = {
 								couponCode: res.data.user.couponCode,
 								state: res.data.user.state,
 								source: res.data.user.source
-							}, res.data.user.source);
+							}, this.params.source);
 							user.loadLocal(res.data.user.source);
 						}
 						else {
@@ -405,7 +405,7 @@ var app = {
 						couponCode: response.data.user.couponCode,
 						state: response.data.user.state,
 						source: response.data.user.source
-					}, response.data.user.source);
+					}, this.params.source);
 				// }
 				if (isTwitter) {
 					this.checkTwitter();
@@ -677,13 +677,12 @@ var app = {
 					    user.clearLocal(this.params.source); // db has been cleared, clear local storage also
 				    }
 				    else {
-				    	// user.saveLocal(response.data.user.id, response.data.user.couponCode, response.data.user.state, response.data.user.source);
 						user.saveLocal({
 							id: response.data.user.id,
 							couponCode: response.data.user.couponCode,
 							state: response.data.user.state,
 							source: response.data.user.source,
-						}, response.data.user.source);
+						}, this.params.source);
 				    }
 					// this.start();
 					this.checkRedirection();

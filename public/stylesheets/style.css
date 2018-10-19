@@ -77,12 +77,28 @@ div {
     width: 300px;
     height: 250px;
   }
+
+  .copy-text {
+    font-size: 15px;
+  }
+
+  .sm {
+    display: block;
+  }
 }
 
 @media( min-width: 480px) {
   .vid-wrapper {
     width: 450px;
     height: 300px;
+  }
+
+  .copy-text {
+    font-size: 16px;
+  }
+
+  .sm {
+    display: none;
   }
 }
 
@@ -222,7 +238,7 @@ div {
   padding: 12px;
   text-align: center;
   position: relative;
-  margin: 15px auto 0px;
+  margin: 15px auto 20px;
 }
 
 .terms ul {
@@ -597,4 +613,8 @@ button:hover .right:after {
   100% {
     top: 5px;
   }
+}
+
+.copy-text {
+  color: #0193DD;
 }
