@@ -37,7 +37,8 @@ var user = {
     return axios.get(apiDomain + '/coupons/mtRainier/user_info', {
       params: {
         id: userId,
-        source: source
+        source: source,
+        cb: window.pgId || Date.now().toString()
       }
     });
 	},

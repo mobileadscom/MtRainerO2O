@@ -382,7 +382,7 @@ button .left {
   width: 10px;
   height: 10px;
   position: absolute;
-  left: -2px;
+  left: 0px;
   top: 4px;
   pointer-events: none;
 }
@@ -399,6 +399,7 @@ button .left:after {
   border-radius: 4px;
   transition: all 0.3s;
   pointer-events: none;
+  left: 10px;
 }
 
 button:hover .left:after {
@@ -414,7 +415,7 @@ button .right {
   width: 10px;
   height: 10px;
   position: absolute;
-  right: 12px;
+  right: 0px;
   top: 4px;
   pointer-events: none;
 }
@@ -431,6 +432,7 @@ button .right:after {
   border-radius: 4px;
   transition: all 0.3s;
   pointer-events: none;
+  right: 10px;
 }
 
 button:hover .right:after {

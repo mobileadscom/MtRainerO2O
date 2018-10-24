@@ -226,8 +226,8 @@ var app = {
 						state: response.data.user.state,
 						source: response.data.user.source,
 						timestamp: Date.now()
-					}, response.data.user.source);
-					user.loadLocal(response.data.user.source);
+					}, this.params.source);
+					user.loadLocal(this.params.source);
 					this.enableSaveAnswer();
 					this.continue();
 					modal.closeAll();
@@ -367,9 +367,9 @@ var app = {
 								id: res.data.user.id,
 								couponCode: res.data.user.couponCode,
 								state: res.data.user.state,
-								source: res.data.user.source
+								source: this.params.source
 							}, this.params.source);
-							user.loadLocal(res.data.user.source);
+							user.loadLocal(this.params.source);
 						}
 						else {
 							console.log('not exist');
@@ -407,13 +407,14 @@ var app = {
 	    		}
 	    		user.isWanderer = false;
 				user.info = response.data.user;
-				user.info.source = response.data.user.source;
+				user.info.source = this.params.source;
 				user.saveLocal({
 					id: userId,
 					couponCode: response.data.user.couponCode,
 					state: response.data.user.state,
 					source: response.data.user.source
 				}, this.params.source);
+				user.loadLocal(this.params.source);
 				if (isTwitter) {
 					this.checkTwitter();
 				}
@@ -807,8 +808,13 @@ var app = {
 
 document.addEventListener('DOMContentLoaded', function() {
 	setTimeout(() => {
-		app.init();
-		modal.init();
+		try {
+			app.init();
+			modal.init();
+		}
+		catch(error) {
+			
+		}
 		window.q = app.q;
 		window.params = app.params;
 	}, 500);
