@@ -12,12 +12,12 @@ var functionsDomain = 'https://us-central1-mtrainier-78bc8.cloudfunctions.net/tw
 
 var localStorageName = 'MtRainier';
 
-var campaignId = '';
+var campaignId = '95953d6d8279e4a0be1ee8ba34d3cbe7';
 var adUserId = '4831';
-var rmaId = '';
+var rmaId = '4';
 var generalUrl = 'https://track.richmediaads.com/a/analytic.htm?rmaId={{rmaId}}&domainId=0&pageLoadId={{cb}}&userId={{adUserId}}&pubUserId=0&campaignId={{campaignId}}&callback=trackSuccess&type={{type}}&value={{value}}&uniqueId={{userId}}&customId={{source}}';
 
-var trackingUrl = generalUrl.replace('{{rmaId}}', rmaId).replace('{{campaignId}}', campaignId).replace('{{adUserId}}', adUserId).replace('{{cb}}', Date.now().toString());
+var trackingUrl = generalUrl.replace('{{rmaId}}', rmaId).replace('{{campaignId}}', campaignId).replace('{{adUserId}}', adUserId).replace('{{cb}}', window.pgId || Date.now().toString());
 
 var user = {
 	isWanderer: false,
@@ -41,186 +41,20 @@ var user = {
       }
     });
 	},
-	register: function(userId, source) {
-		return axios.post(apiDomain + '/coupons/mtRainier/user_register?id=' + userId + '&source=' + source + '&fingerprint=' + userId);
-	},
-	trackFirstImp: function(source) {
-		if (window.location.hostname.indexOf('localhost') < 0) {
-			var localObj = this.getLocal(source);
-			var type = 'imp_new';
-			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
-			if (localObj.status == true) {
-				url = url.replace('{{userId}}', localObj.data.id);
-			}
-			else {
-				url = url.replace('{{userId}}', '');
-			}
-			// console.log(url);
-			return axios.get(url);
-		}
-	},
-	trackSecondImp: function(source) {
-		if (window.location.hostname.indexOf('localhost') < 0) {
-			var localObj = this.getLocal(source);
-			var type = 'imp_2_new';
-			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
-			if (localObj.status == true) {
-				url = url.replace('{{userId}}', localObj.data.id);
-			}
-			else {
-				url = url.replace('{{userId}}', '');
-			}
-			// console.log(url);
-			return axios.get(url);
-		}
-	},
-	trackTermsPage: function(source) {
-		if (window.location.hostname.indexOf('localhost') < 0) {
-			var localObj = this.getLocal(source);
-			var type = 'imp_tnc_new';
-			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
-			if (localObj.status == true) {
-				url = url.replace('{{userId}}', localObj.data.id);
-			}
-			else {
-				url = url.replace('{{userId}}', '');
-			}
-			// console.log(url);
-			return axios.get(url);
-		}
-	},
-	trackRegistrationPage: function(source) {
-		if (window.location.hostname.indexOf('localhost') < 0) {
-			var localObj = this.getLocal(source);
-			var type = 'register_new';
-			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
-			if (localObj.status == true) {
-				url = url.replace('{{userId}}', localObj.data.id);
-			}
-			else {
-				url = url.replace('{{userId}}', '');
-			}
-			// console.log(url);
-			return axios.get(url);
-		}
-	},
-	trackTwitterAlreadyFollow: function(source) {
-		if (window.location.hostname.indexOf('localhost') < 0) {
-			var localObj = this.getLocal(source);
-			var type = 'twitter_followed_new';
-			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
-			if (localObj.status == true) {
-				url = url.replace('{{userId}}', localObj.data.id);
-			}
-			else {
-				url = url.replace('{{userId}}', '');
-			}
-			// console.log(url);
-			return axios.get(url);
-		}
-	},
-	trackTwitterFollowPage: function(source) {
-		if (window.location.hostname.indexOf('localhost') < 0) {
-			var localObj = this.getLocal(source);
-			var type = 'imp_twf_new';
-			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
-			if (localObj.status == true) {
-				url = url.replace('{{userId}}', localObj.data.id);
-			}
-			else {
-				url = url.replace('{{userId}}', '');
-			}
-			// console.log(url);
-			return axios.get(url);
-		}
-	},
-	trackTwitterLoginClick: function(source) {
-		if (window.location.hostname.indexOf('localhost') < 0) {
-			var localObj = this.getLocal(source);
-			var type = 'twitter_click_new';
-			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
-			if (localObj.status == true) {
-				url = url.replace('{{userId}}', localObj.data.id);
-			}
-			else {
-				url = url.replace('{{userId}}', '');
-			}
-			// console.log(url);
-			return axios.get(url);
-		}
-	},
-	trackEmailLogin: function(userId, source) {
-		if (window.location.hostname.indexOf('localhost') < 0) {
-			var type = 'email_link';
-			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{userId}}', userId).replace('{{source}}', source);
-			// console.log(url);
-			return axios.get(url);
-		}
-	},
-	trackEmailLoginClick: function(source) {
-		if (window.location.hostname.indexOf('localhost') < 0) {
-			var localObj = this.getLocal(source);
-			var type = 'email_click_new';
-			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
-			if (localObj.status == true) {
-				url = url.replace('{{userId}}', localObj.data.id);
-			}
-			else {
-				url = url.replace('{{userId}}', '');
-			}
-			// console.log(url);
-			return axios.get(url);
-		}
-	},
-	trackTwitterFollowClick: function(source) {
-		if (window.location.hostname.indexOf('localhost') < 0) {
-			var localObj = this.getLocal(source);
-			var type = 'follow_click_new';
-			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
-			if (localObj.status == true) {
-				url = url.replace('{{userId}}', localObj.data.id);
-			}
-			else {
-				url = url.replace('{{userId}}', '');
-			}
-			// console.log(url);
-			return axios.get(url);
-		}
-	},
-	trackExist: function(userId, source, retrievedFingerprint) {
-		if (window.location.hostname.indexOf('localhost') < 0) {
-			var type = 'exist_new';
-			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', retrievedFingerprint + '_' + userId).replace('{{userId}}', userId).replace('{{source}}', source);
-			// console.log(url);
-			return axios.get(url);
-		}
-	},
-	trackRegister: function(userId, source, method) {
-    // track as impression
-	    if (window.location.hostname.indexOf('localhost') < 0) {
-	    	var type = 'page_view';
-	    	if (method == 'twitter') {
-	    		type = 'page_view_tw';
-	    	}
-	    	else if (method == 'email') {
-	    		type = 'page_view_email';
-	    	}
-			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{userId}}', userId).replace('{{source}}', source);
-			// console.log(url);
-			return axios.get(url);
-	    }
+	register: function(userId, source, method) {
+		return axios.post(apiDomain + '/coupons/mtRainier/user_register?id=' + userId + '&source=' + source + '&fingerprint=' + userId + '&type=' + method);
 	},
 	sendEmail: function(email, subjectTitle, content) {
-  	var formData = new FormData();
-    formData.append('sender', 'couponcampaign@ienomistyle.com');
-    formData.append('subject', subjectTitle);
-    formData.append('recipient', email);
-    formData.append('content', content);
-    axios.post(domain + '/mail/send', formData, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function(resp) {
-      console.log(resp);
-    }).catch(function(error) {
-      console.log(error);
-    });
+	  	var formData = new FormData();
+	    formData.append('sender', 'couponcampaign@ienomistyle.com');
+	    formData.append('subject', subjectTitle);
+	    formData.append('recipient', email);
+	    formData.append('content', content);
+	    axios.post(domain + '/mail/send', formData, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function(resp) {
+	      console.log(resp);
+	    }).catch(function(error) {
+	      console.log(error);
+	    });
 	},
 	registerTwitter: function() {
 		console.log('registerTwitter');
@@ -260,24 +94,99 @@ var user = {
       text: message
      });
 	},
+	mark: function(userId, state, groups, source) {
+		// var groupJSON = JSON.stringify(groups);
+		var groupJSON = groups[0];
+		return axios.post(apiDomain + '/coupons/mtRainier/mark_user?id=' + userId + '&state=' + state + '&group=' + groupJSON + '&source=' + source);
+	},
+	trackPageView: function(type, source) {
+		if (window.location.hostname.indexOf('localhost') < 0) {
+			var localObj = this.getLocal(source);
+			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
+			if (localObj.status == true) {
+				url = url.replace('{{userId}}', localObj.data.id);
+			}
+			else {
+				url = url.replace('{{userId}}', '');
+			}
+			// console.log(url);
+			return axios.get(url);
+		}
+	},
+	trackClick: function(type, source) {
+		if (window.location.hostname.indexOf('localhost') < 0) {
+			var localObj = this.getLocal(source);
+			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
+			if (localObj.status == true) {
+				url = url.replace('{{userId}}', localObj.data.id);
+			}
+			else {
+				url = url.replace('{{userId}}', '');
+			}
+			// console.log(url);
+			return axios.get(url);
+		}
+	},
+	trackTwitterAlreadyFollow: function(source) {
+		if (window.location.hostname.indexOf('localhost') < 0) {
+			var localObj = this.getLocal(source);
+			var type = 'twitter_followed_new';
+			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{source}}', source);
+			if (localObj.status == true) {
+				url = url.replace('{{userId}}', localObj.data.id);
+			}
+			else {
+				url = url.replace('{{userId}}', '');
+			}
+			// console.log(url);
+			return axios.get(url);
+		}
+	},
+	trackEmailLogin: function(userId, source) {
+		if (window.location.hostname.indexOf('localhost') < 0) {
+			var type = 'email_link';
+			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{userId}}', userId).replace('{{source}}', source);
+			// console.log(url);
+			return axios.get(url);
+		}
+	},
+	trackExist: function(userId, source, retrievedFingerprint) {
+		if (window.location.hostname.indexOf('localhost') < 0) {
+			var type = 'exist';
+			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', retrievedFingerprint + '_' + userId).replace('{{userId}}', userId).replace('{{source}}', source);
+			// console.log(url);
+			return axios.get(url);
+		}
+	},
+	trackRegister: function(userId, source, method) {
+	    if (window.location.hostname.indexOf('localhost') < 0) {
+	    	var type = 'register';
+	    	if (method == 'twitter') {
+	    		type = 'register_tw';
+	    	}
+	    	else if (method == 'email') {
+	    		type = 'register_email';
+	    	}
+			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{userId}}', userId).replace('{{source}}', source);
+			// console.log(url);
+			return axios.get(url);
+	    }
+	},
 	trackAnswer: function(userId, questionNo, answer, source) {
 		if (window.location.hostname.indexOf('localhost') < 0) {
 			var type = 'q_a';
 			var value = 'q' + questionNo.toString() + '_' + encodeURIComponent(answer);
 			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', value).replace('{{userId}}', userId).replace('{{source}}', source);
+			// console.log(url);
 			return axios.get(url);
 		}
-	},
-	mark: function(userId, state, groups, source) {
-		// var groupJSON = JSON.stringify(groups);
-		var groupJSON = groups[0];
-		return axios.post(apiDomain + '/coupons/mtRainier/mark_user?id=' + userId + '&state=' + state + '&group=' + groupJSON + '&source=' + source);
 	},
 	trackWin: function(userId, couponCode, source) {
 		if (window.location.hostname.indexOf('localhost') < 0) {
 			var type = 'win';
 			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', couponCode).replace('{{userId}}', userId).replace('{{source}}', source);
 			url += '&tt=E&ty=E';
+			// console.log(url);
 			return axios.get(url);
 		}
 	},
@@ -286,6 +195,7 @@ var user = {
 			var type = 'lose';
 			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{userId}}', userId).replace('{{source}}', source);
 			url += '&tt=E&ty=E';
+			// console.log(url);
 			return axios.get(url);
 		}
 	},

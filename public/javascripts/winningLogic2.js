@@ -1,19 +1,19 @@
 var winningLogic = {
 	winLogic: {
     '1': {
-      value: '男性',
+      value: 'a1',
       priority: [4]
     },
     '2': {
-      value: ['３０代', '４０代', '５０代'],
+      value: ['a3', 'a4', 'a5'],
       priority: [3, 3, 3]
     },
     '3': {
-      value: ['週４回以上', '週２〜３回', '週１回', '月２〜３回'],
+      value: ['a1', 'a2', 'a3', 'a4'],
       priority: [2, 2, 2, 2]
     },
     '4': {
-      value: ['週１回', '月２〜３回', '月１回', '２〜３ヶ月に１回'],
+      value: ['a3', 'a4', 'a5', 'a6'],
       priority: [1, 1, 1, 1]
     }
 	},

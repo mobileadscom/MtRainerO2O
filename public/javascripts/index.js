@@ -78,7 +78,6 @@ var app = {
 			console.log(resultProperties);
 			var actualResult = resultProperties.actualResult;
 			var group = resultProperties.group;
-			// var actualResult = 'win';
 			var group = ['A'];
 			if (!user.isWanderer) {
 				user.mark(user.info.id, actualResult, group, this.params.source).then((response) => {
@@ -99,13 +98,13 @@ var app = {
 				        	 user.sendEmail(user.info.id, 'Ienomistyle クーポンキャンペーン', emailContent);
 						}
 						else {
-							// user.messageTwitter(message);
+							user.messageTwitter(message);
 						}
 						// user.passResult(user.info.id, flag, user.info.source, couponInfo.couponLink);
-						// user.trackWin(user.info.id, response.data.couponCode, this.params.source);
+						user.trackWin(user.info.id, response.data.couponCode, this.params.source);
 					}
 					else {
-						// user.trackLose(user.info.id, this.params.source);
+						user.trackLose(user.info.id, this.params.source);
 						user.saveLocal({
 							id: user.info.id,
 							couponCode: '',
@@ -127,12 +126,13 @@ var app = {
 		});
 	},
 	continue: function() {
+		this.changeHeaderImage();
 		var localObj = user.getLocal(this.params.source);
 		var userAnswers = localObj.status == true ? localObj.data.answers : [];
 		var noQuestionAnswered = userAnswers.length - 1;
 
 		if (localObj.status == true && localObj.data.id.indexOf('@') > -1) {
-			// user.trackEmailLogin(localObj.data.id, this.params.source);
+			user.trackEmailLogin(localObj.data.id, this.params.source);
 		}
 
 		/*apply answer to answered question */
@@ -146,10 +146,12 @@ var app = {
 			console.log(user.info);
 			this.initResult('win', this.generateCouponLink(user.info.id, this.params.source));
 			this.pages.toPage('resultPage');
+			user.trackPageView('imp_6', this.params.source);
 		}
 		else if (user.info.state == 'lose') {
 			this.initResult('lose');
 			this.pages.toPage('resultPage');
+			user.trackPageView('imp_6', this.params.source);
 		}
 		else {
 			if (noQuestionAnswered > 0) {
@@ -164,6 +166,7 @@ var app = {
 				this.pages.toPage('page1');
 			}
 		}
+		this.changeHeaderImage();
 	},
 	events: function() {
 		/* ==== Event Listeners ==== */
@@ -191,7 +194,7 @@ var app = {
 	  }*/
 
 	/* email registration */
-	/*var form = document.getElementById('regForm');
+	var form = document.getElementById('regForm');
 
 	form.onsubmit = (event) => {
 		if (!this.registering) {
@@ -203,16 +206,15 @@ var app = {
 			spinner.style.display = 'block';
 			event.preventDefault();
 			var email = document.getElementById('emailInput').value;
-			user.register(email, this.params.source).then((response) => {
+			user.register(email, this.params.source, 'email').then((response) => {
 				this.registering = false;
 				console.log(response);
 				spinner.style.display = 'none';
 				if (response.data.status == true) {
 					this.formSections.toPage('doneSec');
-					// var emailContent = '<head><meta charset="utf-8"></head>ご登録ありがとうございました。下記にあるリンクをクリックしてください。その後キャンペーンへの参加をお願いします<br><br><a href="https://couponcampaign.ienomistyle.com/ボディメンテドリンク/?userId=' + email + '" target="_blank">https://couponcampaign.ienomistyle.com/ボディメンテドリンク/?userId=' + email + '</a>';
 					var emailContent = '<head><meta charset="utf-8"></head>ご登録ありがとうございました。下記にあるリンクをクリックしてください。その後キャンペーンへの参加をお願いします<br><br><a href="https://s3.amazonaws.com/rmarepo/o2o/MtRainier/index.html?userId=' + email + '" target="_blank">https://s3.amazonaws.com/rmarepo/o2o/MtRainier/index.html?userId=' + email + '</a>';
 					user.sendEmail(email, 'Ienomistyle クーポンキャンペーン', emailContent);
-					// user.trackRegister(email, this.params.source, 'email');
+					user.trackRegister(email, this.params.source, 'email');
 				}
 				else if (response.data.message == 'user exist.') {
 					user.info.source = this.params.source;
@@ -237,7 +239,7 @@ var app = {
 				spinner.style.display = 'none';
 			});
 		}
-	};*/
+	};
 
     /* twitter registration / login */
     var twitReg = document.getElementById('regTwitter');
@@ -246,7 +248,7 @@ var app = {
       var regButtons = document.getElementById('regButtons');
       regLoader.style.display = 'block';
       regButtons.style.display = 'none';
-      // user.trackTwitterLoginClick(this.params.source);
+      user.trackClick('click_twitter', this.params.source);
       setTimeout(() => {
 			user.registerTwitter()
 		}, 1000);
@@ -275,7 +277,7 @@ var app = {
     var followBtn = document.getElementById('followBtn');
     followBtn.onclick = () => {
     	followBtn.style.display = 'none';
-    	// user.trackTwitterFollowClick(this.params.source);
+    	user.trackClick('click_follow', this.params.source);
     	user.followTwitter().then((response) => {
 				console.log(response);
 	        if (response.data == 'followed!') {
@@ -293,6 +295,7 @@ var app = {
 
     document.getElementById('toVideo').addEventListener('click', () => {
 		setTimeout(() => {
+			user.trackPageView('imp_5', this.params.source);
 			// youtube
 			this.player.playVideo();
 
@@ -302,23 +305,31 @@ var app = {
     });
 
     document.getElementById('toTerms2').addEventListener('click', () => {
+    	this.changeHeaderImage();
     	document.getElementById('tnc').style.display = 'none';
     	setTimeout(() => {
-			// user.trackTermsPage(this.params.source);
-			// user.trackRegistrationPage(this.params.source);
+    		// user.trackPageView('imp_tnc', this.params.source);
+    		user.trackPageView('imp_2', this.params.source);
     	}, 300);
     });
 
-    document.getElementById('startSurvey').addEventListener('click', () => {
+    /*document.getElementById('startSurvey').addEventListener('click', () => {
     	setTimeout(() => {
-			// user.trackRegistrationPage(this.params.source);
+    		user.trackPageView('imp_register', this.params.source);
     	}, 300);
-    })
-    /*document.getElementById('regEmail').addEventListener('click', () => {
+    })*/
+    
+	document.getElementById('toApply').addEventListener('click', () => {
 		setTimeout(() => {
-			// user.trackEmailLoginClick(this.params.source);
+			user.trackClick('imp_4', this.params.source);
 		});
-    });*/
+	});
+
+    document.getElementById('regEmail').addEventListener('click', () => {
+		setTimeout(() => {
+			user.trackClick('click_email', this.params.source);
+		});
+    });
 	  /* ==== Event Listeners End ==== */
 	},
 	checkTwitter: function() { // Check if user is following official page
@@ -330,8 +341,9 @@ var app = {
 	    }
 		else {
 			this.pages.toPage('followPage');
-			// user.trackTwitterFollowPage(this.params.source);
+			user.trackPageView('imp_3', this.params.source);
 	    }
+	    this.changeHeaderImage();
     }).catch((error) => {
       console.log(error);
       document.getElementById('regWorking').style.display = 'none';
@@ -344,7 +356,8 @@ var app = {
 			console.log(response);
 	    	if (response.data.status == false) { // user is not registered
 		    	if (autoRegister) {
-		    		user.register(userId, this.params.source).then((res) => { // auto register user
+		    		var method = isTwitter ? 'twitter' : 'email';
+		    		user.register(userId, this.params.source, method).then((res) => { // auto register user
 						console.log(res);
 						user.isWanderer = false;
 						user.info.source = this.params.source;
@@ -360,8 +373,8 @@ var app = {
 						}
 						else {
 							console.log('not exist');
-							var method = isTwitter ? 'twitter' : 'email';
-							// user.trackRegister(userId, this.params.source, method);
+							
+							user.trackRegister(userId, this.params.source, method);
 							user.saveLocal({
 								id: userId,
 								couponCode: '',
@@ -390,23 +403,17 @@ var app = {
 	    	}
 	    	else { // user is registered
 	    		if (userId.indexOf('@') < 0) {
-	    			// user.trackExist(userId, this.params.source, response.data.user.fingerprint);
+	    			user.trackExist(userId, this.params.source, response.data.user.fingerprint);
 	    		}
 	    		user.isWanderer = false;
 				user.info = response.data.user;
 				user.info.source = response.data.user.source;
-				// if (this.localObj.status == true) { // this browser already have user
-				// 	user.loadLocal();
-				// }
-				// else {
-					// user.saveLocal(userId, response.data.user.couponCode, response.data.user.state, response.data.user.source);
-					user.saveLocal({
-						id: userId,
-						couponCode: response.data.user.couponCode,
-						state: response.data.user.state,
-						source: response.data.user.source
-					}, this.params.source);
-				// }
+				user.saveLocal({
+					id: userId,
+					couponCode: response.data.user.couponCode,
+					state: response.data.user.state,
+					source: response.data.user.source
+				}, this.params.source);
 				if (isTwitter) {
 					this.checkTwitter();
 				}
@@ -436,7 +443,7 @@ var app = {
 			  	user.saveLocalAnswers(qArray, this.params.source);
 	  		}
 	  		var qNo = parseInt(e.target.dataset.question);
-	  		// user.trackAnswer(user.info.id, qNo, this.q[qNo].selectedAnswer, this.params.source);
+	  		user.trackAnswer(user.info.id, qNo, this.q[qNo].selectedAnswer, this.params.source);
 			  // user.saveAnswer(user.info.id, qArray);
 	  	})
 	 }
@@ -447,10 +454,10 @@ var app = {
 	  	wrapper: document.getElementById('q1'),
 	  	question: '<span class="red">QUESTION 1</span><br>性別をお選びください。',
 	  	answers: [{
-	    	value: '男性',
+	    	value: 'a1',
 	    	text: '男性',
 	    }, {
-	    	value: '女性',
+	    	value: 'a2',
 	    	text: '女性'
 	    }],
 	    nextBtn: document.getElementById('toQ2')
@@ -460,22 +467,22 @@ var app = {
 	  	wrapper: document.getElementById('q2'),
 	  	question: '<span class="red">QUESTION 2</span><br>年齢をお選びください。',
 	  	answers: [{
-	    	value: '１０代',
+	    	value: 'a1',
 	    	text: '１０代',
 	    }, {
-	    	value: '２０代',
+	    	value: 'a2',
 	    	text: '２０代'
 	    }, {
-	    	value: '３０代',
+	    	value: 'a3',
 	    	text: '３０代'
 	    }, {
-	    	value: '４０代',
+	    	value: 'a4',
 	    	text: '４０代'
 	    }, {
-	    	value: '５０代',
+	    	value: 'a5',
 	    	text: '５０代'
 	    }, {
-	    	value: '６０代以上',
+	    	value: 'a6',
 	    	text: '６０代以上'
 	    }],
 	    nextBtn: document.getElementById('toQ3')
@@ -485,31 +492,31 @@ var app = {
 	  	wrapper: document.getElementById('q3'),
 	  	question: '<span class="red">QUESTION 3</span><br>コンビニやスーパーで売られている、市販のコーヒー飲料（ブラック・カフェラテ問わず）をどのくらいの頻度で自分で飲むために購入しますか。',
 	  	answers: [{
-	    	value: '週４回以上',
+	    	value: 'a1',
 	    	text: '週４回以上',
 	    }, {
-	    	value: '週２〜３回',
+	    	value: 'a2',
 	    	text: '週２〜３回'
 	    }, {
-	    	value: '週１回',
+	    	value: 'a3',
 	    	text: '週１回'
 	    }, {
-	    	value: '月２〜３回',
+	    	value: 'a4',
 	    	text: '月２〜３回'
 	    }, {
-	    	value: '月１回',
+	    	value: 'a5',
 	    	text: '月１回'
 	    }, {
-	    	value: '２〜３ヶ月に１回',
+	    	value: 'a6',
 	    	text: '２〜３ヶ月に１回'
 	    }, {
-	    	value: '半年に１回',
+	    	value: 'a7',
 	    	text: '半年に１回'
 	    }, {
-	    	value: '半年に１回未満',
+	    	value: 'a8',
 	    	text: '半年に１回未満'
 	    }, {
-	    	value: '飲まない',
+	    	value: 'a9',
 	    	text: '飲まない'
 	    }],
 	    nextBtn: document.getElementById('toQ4')
@@ -519,71 +526,71 @@ var app = {
 	  	wrapper: document.getElementById('q4'),
 	  	question: '<span class="red">QUESTION 4</span><br>普段「マウントレーニア」をどのくらいの頻度で自分で飲むために購入しますか。',
 	  	answers: [{
-	    	value: '週４回以上',
+	    	value: 'a1',
 	    	text: '週４回以上',
 	    }, {
-	    	value: '週２〜３回',
+	    	value: 'a2',
 	    	text: '週２〜３回'
 	    }, {
-	    	value: '週１回',
+	    	value: 'a3',
 	    	text: '週１回'
 	    }, {
-	    	value: '月２〜３回',
+	    	value: 'a4',
 	    	text: '月２〜３回'
 	    }, {
-	    	value: '月１回',
+	    	value: 'a5',
 	    	text: '月１回'
 	    }, {
-	    	value: '２〜３ヶ月に１回',
+	    	value: 'a6',
 	    	text: '２〜３ヶ月に１回'
 	    }, {
-	    	value: '半年に１回',
+	    	value: 'a7',
 	    	text: '半年に１回'
 	    }, {
-	    	value: '半年に１回未満',
+	    	value: 'a8',
 	    	text: '半年に１回未満'
 	    }, {
-	    	value: '飲まない',
+	    	value: 'a9',
 	    	text: '飲まない'
 	    }, {
-	    	value: '知らない',
+	    	value: 'a10',
 	    	text: '知らない'
 	    }],
-	    nextBtn: document.getElementById('toApply')
+	    nextBtn: document.getElementById('toQ5')
 	  });
 
 	  this.q[5] = new singleAnswerQuestion({
 	  	wrapper: document.getElementById('q5'),
 	  	question: '<span class="red">QUESTION 5</span><br>普段「ペットボトル入りコーヒー（500ml 前後サイズ）」をどのくらいの頻度で自分で飲むために購入しますか。',
 	  	answers: [{
-	    	value: '週４回以上',
+	    	value: 'a1',
 	    	text: '週４回以上',
 	    }, {
-	    	value: '週２〜３回',
+	    	value: 'a2',
 	    	text: '週２〜３回'
 	    }, {
-	    	value: '週１回',
+	    	value: 'a3',
 	    	text: '週１回'
 	    }, {
-	    	value: '月２〜３回',
+	    	value: 'a4',
 	    	text: '月２〜３回'
 	    }, {
-	    	value: '月１回',
+	    	value: 'a5',
 	    	text: '月１回'
 	    }, {
-	    	value: '２〜３ヶ月に１回',
+	    	value: 'a6',
 	    	text: '２〜３ヶ月に１回'
 	    }, {
-	    	value: '半年に１回',
+	    	value: 'a7',
 	    	text: '半年に１回'
 	    }, {
-	    	value: '半年に１回未満',
+	    	value: 'a8',
 	    	text: '半年に１回未満'
 	    }, {
-	    	value: '飲まない',
+	    	value: 'a9',
 	    	text: '飲まない'
 	    }, {
-	    	value: '知らない',
+	    	value: 'a10',
 	    	text: '知らない'
 	    }],
 	    nextBtn: document.getElementById('toApply')
@@ -612,7 +619,7 @@ var app = {
 		if (localObj.status == true && localObj.data.source == this.params.source) { // this browser already have user
 			user.isWanderer = false;
 			user.loadLocal(this.params.source);
-			// user.trackSecondImp(this.params.source);
+			user.trackPageView('revisit', this.params.source);
 			this.enableSaveAnswer();
 			this.continue();
 		}
@@ -720,6 +727,7 @@ var app = {
 		            'onStateChange': (event) => {
 			            if (event.data == YT.PlayerState.ENDED) {
 							this.pages.toPage('resultPage');
+							user.trackPageView('imp_6', this.params.source);
 			            }
 			            else if (event.data == YT.PlayerState.PLAYING) {
 			            	var playtimer = setInterval(() => {
@@ -788,14 +796,19 @@ var app = {
 
 		this.player.addEventListener('ended', () => {
 			this.pages.toPage('resultPage');
+			user.trackPageView('imp_7', this.params.source);
 		});*/
+	},
+	changeHeaderImage() {
+    	document.getElementById('mainHeader').style.display = 'none';
+    	document.getElementById('banner').style.display = 'block';
 	}
 }
 
 document.addEventListener('DOMContentLoaded', function() {
 	setTimeout(() => {
 		app.init();
-		// modal.init();
+		modal.init();
 		window.q = app.q;
 		window.params = app.params;
 	}, 500);

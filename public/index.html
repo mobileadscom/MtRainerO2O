@@ -22,43 +22,56 @@
 			  } 
 			  return query_string;
 		}
+		
+		function getRndInteger(min, max) {
+		    return Math.floor(Math.random() * (max - min) ) + min;
+		}
+		
+		// function generatePageLoadId() {
+			window.pgId = Date.now().toString() + getRndInteger(10, 99).toString();
+		
 
-		/*if (window.location.hostname.indexOf('localhost')) {
-			var qparams = queryParams();
-			var campaignId = '';
-			var adUserId = '';
-			var rmaId = '';
-			var generalUrl = 'https://track.richmediaads.com/a/analytic.htm?rmaId={{rmaId}}&domainId=0&pageLoadId={{cb}}&userId={{adUserId}}&pubUserId=0&campaignId={{campaignId}}&callback=trackSuccess&type={{type}}&value={{value}}&uniqueId={{userId}}&customId={{source}}';
-			var trackingUrl = generalUrl.replace('{{rmaId}}', rmaId).replace('{{campaignId}}', campaignId).replace('{{adUserId}}', adUserId).replace('{{cb}}', Date.now().toString());
-		    var pixel = document.createElement('img');
-		    var type = 'imp'
-		    var src = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{userId}}','').replace('{{source}}', 'MtRainier')
-		    pixel.src = src;
-		    document.head.appendChild(pixel);
-		}*/
+		// imp tracker
+		var qparams = queryParams();
+		var campaignId = '95953d6d8279e4a0be1ee8ba34d3cbe7';
+		var adUserId = '4831';
+		var rmaId = '4';
+		var generalUrl = 'https://track.richmediaads.com/a/analytic.htm?rmaId={{rmaId}}&domainId=0&pageLoadId={{cb}}&userId={{adUserId}}&pubUserId=0&campaignId={{campaignId}}&callback=trackSuccess&type={{type}}&value={{value}}&uniqueId={{userId}}&customId={{source}}';
+		var trackingUrl = generalUrl.replace('{{rmaId}}', rmaId).replace('{{campaignId}}', campaignId).replace('{{adUserId}}', adUserId).replace('{{cb}}', pgId);
+	    var pixel = document.createElement('img');
+	    var type = 'imp'
+	    var src = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{userId}}','').replace('{{source}}', 'MtRainier')
+	    if (window.location.hostname.indexOf('localhost') > -1) {
+		    console.log(src);
+		}
+		else {
+			pixel.src = src;
+			document.head.appendChild(pixel);
+		}
+		    
 	</script>
-	<!-- Google Tag Manager -->
-<!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5FWB9JK');</script> -->
+})(window,document,'script','dataLayer','GTM-KPGXXHN');</script>
 <!-- End Google Tag Manager -->
   <title>イエノミスタイル</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
 </head>
 <body>
-	<!-- <noscript>
-		<img src="https://track.richmediaads.com/a/analytic.htm?rmaId=&domainId=0&pageLoadId=12345&userId=&pubUserId=0&campaignId=&callback=trackSuccess&type=imp_nojs_new&value=&uniqueId=&customId="  border="0" width="0x" height="0" style="display:none;visibility:hidden"/>
-	</noscript> -->
-	<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5FWB9JK"
+	<noscript>
+		<img src="https://track.richmediaads.com/a/analytic.htm?rmaId=4&domainId=0&pageLoadId=12345&userId=4831&pubUserId=0&campaignId=95953d6d8279e4a0be1ee8ba34d3cbe7&callback=trackSuccess&type=imp_nojs&value=&uniqueId=&customId="  border="0" width="0x" height="0" style="display:none;visibility:hidden"/>
+	</noscript>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KPGXXHN"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
   <header>
-  	<div class="banner">
-      <img src="images/header-new-3.png" />
+  	<div class="banner" id="banner" style="display: none;">
+		<img src="images/header-new-3.png" />
   	</div>
   </header>
 
@@ -100,6 +113,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	    </div>
 	  </div>
 	  <div id="termsPage" class="page">
+	  	<img src="images/first-page-banner.jpg" id="mainHeader" style="margin: 10px auto 0px; height: 140px;" />
 	  	<div class="msg-wrapper" id="terms1Msg" style="margin-bottom: 10px;">
 		  	<span class="copy-text">アンケートに答えて商品をGet!
 				<br>抽選で50,000名様にマイスターズラテを<br>プレゼント</span>
@@ -228,7 +242,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	  		<br>アンケートにお進みください。 -->
 	  	</div>
 	    <div id="regButtons">
-	      <!-- <button class="registerBtn modalOpener shadow-1" id="regEmail" data-target="regModal">Email</button> -->
+	      <button class="registerBtn modalOpener shadow-1" id="regEmail" data-target="regModal">Email</button>
 	      <div></div>
 	      <button class="registerBtn shadow-2" id="regTwitter">Twitter</button>
 	    </div>

@@ -83,7 +83,7 @@
     <div id="surveyPage" style="display: none;">
       <span style="color: #0193DD; font-size: 16px;">アンケートに答えて商品をGet!
       <br>抽選で50,000名様に商品をプレゼント</span>
-      <br><br><a href="https://s3.amazonaws.com/rmarepo/o2o/mtRainier/index.html" style="font-size: 14px;">https://s3.amazonaws.com/rmarepo/o2o/mtRainier/index.html</a>
+      <br><br><a href="https://s3.amazonaws.com/rmarepo/o2o/MtRainier/index.html" style="font-size: 14px;">https://s3.amazonaws.com/rmarepo/o2o/MtRainier/index.html</a>
     </div>
     <div id="loserPage" style="display: none;">
       <div id="resultTitle" style="color: red;">残念！</div>
@@ -124,16 +124,17 @@ function getParams() {
 
 function trackCouponView(userId, couponCode, source) {
   if (window.location.hostname.indexOf('localhost') < 0 && window.location.protocol != 'file:') {
-    // var pixel = document.createElement('img');
-    // var type = 'coupon_view'
-    // var src = trackingUrl.replace('{{type}}', type).replace('{{value}}', couponCode).replace('{{userId}}', userId).replace('{{source}}', source);
-    // pixel.src = src;
-    // document.body.appendChild(pixel);
+    var pixel = document.createElement('img');
+    var type = 'coupon_view'
+    var src = trackingUrl.replace('{{type}}', type).replace('{{value}}', couponCode).replace('{{userId}}', userId).replace('{{source}}', source);
+    pixel.src = src;
+    document.body.appendChild(pixel);
   }
 }
 
-function showCouponCode(couponCode, source) {
-  document.getElementById('couponNumber').innerHTML = couponCode;
+function showCouponCode(couponCode, source, logic) {
+  // document.getElementById('couponNumber').innerHTML = couponCode;
+  document.getElementById('couponNumber').innerHTML = logic + '-' + couponCode;
   document.getElementById('loadingPage').style.display = 'none';
   document.getElementById('couponPage').style.display = 'block';
 }
@@ -150,7 +151,7 @@ function renderFromAPI(userId, source) {
       console.log(response);
       try {
         if (response.user.couponCode) {
-          showCouponCode(response.user.couponCode, response.user.source);
+          showCouponCode(response.user.couponCode, response.user.source, response.user.logic);
           trackCouponView(params.userId, response.user.couponCode, params.source);
         }
         else {
@@ -203,7 +204,7 @@ function renderFromAPI(userId, source) {
 }
 
 function getLocal(source) {
-  if (window.localStorage.getItem('BodyMainte')) {
+  if (window.localStorage.getItem('MtRainier')) {
     try {
       var dataObj = JSON.parse(window.localStorage.getItem('BodyMainte'));
       if (dataObj[source] && dataObj[source].id) {
@@ -235,7 +236,8 @@ function getLocal(source) {
 document.addEventListener('DOMContentLoaded', function() {
   var params = getParams();
   window.params = params;
-  if (params.userId && params.source) {
+  params.source = 'MtRainier';
+  if (params.userId) {
     // try {
     //   var localObj = getLocal();
     //   if (localObj.status == true) {
