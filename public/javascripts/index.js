@@ -84,6 +84,7 @@ var app = {
 					winningLogic.processed = true;
 					console.log(response)
 					if (response.data.couponCode) {
+						user.trackWin(user.info.id, response.data.couponCode, this.params.source);
 						var couponLink = this.generateCouponLink(user.info.id, this.params.source);
 						user.saveLocal({
 							id: user.info.id,
@@ -101,7 +102,6 @@ var app = {
 							user.messageTwitter(message);
 						}
 						// user.passResult(user.info.id, flag, user.info.source, couponInfo.couponLink);
-						user.trackWin(user.info.id, response.data.couponCode, this.params.source);
 					}
 					else {
 						user.trackLose(user.info.id, this.params.source);
@@ -211,10 +211,10 @@ var app = {
 				console.log(response);
 				spinner.style.display = 'none';
 				if (response.data.status == true) {
+					user.trackRegister(email, this.params.source, 'email');
 					this.formSections.toPage('doneSec');
 					var emailContent = '<head><meta charset="utf-8"></head>ご登録ありがとうございました。下記にあるリンクをクリックしてください。その後キャンペーンへの参加をお願いします<br><br><a href="https://s3.amazonaws.com/rmarepo/o2o/MtRainier/index.html?userId=' + email + '" target="_blank">https://s3.amazonaws.com/rmarepo/o2o/MtRainier/index.html?userId=' + email + '</a>';
 					user.sendEmail(email, 'Ienomistyle クーポンキャンペーン', emailContent);
-					user.trackRegister(email, this.params.source, 'email');
 				}
 				else if (response.data.message == 'user exist.') {
 					user.info.source = this.params.source;
@@ -276,8 +276,8 @@ var app = {
 
     var followBtn = document.getElementById('followBtn');
     followBtn.onclick = () => {
-    	followBtn.style.display = 'none';
     	user.trackClick('click_follow', this.params.source);
+    	followBtn.style.display = 'none';
     	user.followTwitter().then((response) => {
 				console.log(response);
 	        if (response.data == 'followed!') {
@@ -372,9 +372,8 @@ var app = {
 							user.loadLocal(this.params.source);
 						}
 						else {
-							console.log('not exist');
-							
 							user.trackRegister(userId, this.params.source, method);
+							console.log('not exist');
 							user.saveLocal({
 								id: userId,
 								couponCode: '',
@@ -618,9 +617,9 @@ var app = {
 	start: function(delay) {
 		var localObj = user.getLocal(this.params.source);
 		if (localObj.status == true && localObj.data.source == this.params.source) { // this browser already have user
+			user.trackPageView('revisit', this.params.source);
 			user.isWanderer = false;
 			user.loadLocal(this.params.source);
-			user.trackPageView('revisit', this.params.source);
 			this.enableSaveAnswer();
 			this.continue();
 		}
