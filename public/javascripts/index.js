@@ -51,14 +51,14 @@ var app = {
 				document.getElementById('couponInfo').style.display = 'none';
 			}
 			else {
-				document.getElementById('resultInstruction').innerHTML = "クーポンを受け取って、ファミリーマートで引き換えてください";
+				document.getElementById('resultInstruction').innerHTML = "シリアル番号を受け取って、ファミリーマートで引き換えてください";
 			}
 
 			if (couponLink) {
 				document.getElementById('couponLoader').style.display = 'none';
 				document.getElementById('couponLink').href = couponLink;
 				// document.getElementById('couponLink').setAttribute('target', '_blank');
-				document.getElementById('getCoupon').innerText = 'クーポンを受け取る';
+				document.getElementById('getCoupon').innerText = 'シリアル番号を受け取る';
 			}
 		}
 		else {
@@ -95,11 +95,11 @@ var app = {
 						this.initResult('win', couponLink);
 						var message = 'マウントレーニア　マイスターズラテが当たりました!    ' + couponLink;
 						if (user.info.id.indexOf('@') > -1) { // login via email
-				        	var emailContent = '<head><meta charset="utf-8"></head><div style="text-align:center;font-weight:600;color:#FF4244;font-size:28px;">おめでとうございます</div><br><br><div style="text-align:center;font-weight:600;">クーポンが当たりました！</div><a href="' + couponLink + '" target="_blank" style="text-decoration:none;"><button style="display:block;margin:20px auto;margin-bottom:40px;border-radius:5px;background-color:#E54C3C;border:none;color:white;width:200px;height:50px;font-weight:600;">クーポンを受取る</button></a>';
+				        	var emailContent = '<head><meta charset="utf-8"></head><div style="text-align:center;font-weight:600;color:#FF4244;font-size:28px;">おめでとうございます</div><br><br><div style="text-align:center;font-weight:600;">マウントレーニア マイスターズラテが当たりました!</div><a href="' + couponLink + '" target="_blank" style="text-decoration:none;"><button style="display:block;margin:20px auto;margin-bottom:40px;border-radius:5px;background-color:#E54C3C;border:none;color:white;width:200px;height:50px;font-weight:600;">シリアル番号を受取る</button></a>';
 				        	 user.sendEmail(user.info.id, 'Ienomistyle クーポンキャンペーン', emailContent);
 						}
 						else {
-							user.messageTwitter(message);
+							// user.messageTwitter(message);
 						}
 						// user.passResult(user.info.id, flag, user.info.source, couponInfo.couponLink);
 					}
@@ -213,7 +213,7 @@ var app = {
 				if (response.data.status == true) {
 					user.trackRegister(email, this.params.source, 'email');
 					this.formSections.toPage('doneSec');
-					var emailContent = '<head><meta charset="utf-8"></head>ご登録ありがとうございました。下記にあるリンクをクリックしてください。その後キャンペーンへの参加をお願いします<br><br><a href="https://s3.amazonaws.com/rmarepo/o2o/MtRainier/index.html?userId=' + email + '" target="_blank">https://s3.amazonaws.com/rmarepo/o2o/MtRainier/index.html?userId=' + email + '</a>';
+					var emailContent = '<head><meta charset="utf-8"></head>ご登録ありがとうございました。下記にあるリンクをクリックしてください。その後キャンペーンへの参加をお願いします<br><br><a href="https://s3.amazonaws.com/rmarepo/o2o/MtRainier/index.html?userId=' + email + '" target="_blank">https://s3.amazonaws.com/rmarepo/o2o/MtRainier/index.html?userId=' + email + '</a><br><br>ienomistyle キャンペーン事務局<br><br>※このメールの送信アドレスは送信専用でございます。返信いただいても対応は致しかねますのであらかじめご了承ください。';
 					user.sendEmail(email, 'Ienomistyle クーポンキャンペーン', emailContent);
 				}
 				else if (response.data.message == 'user exist.') {
@@ -812,7 +812,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			modal.init();
 		}
 		catch(error) {
-			
+			alert('Browser not supported')
 		}
 		window.q = app.q;
 		window.params = app.params;
