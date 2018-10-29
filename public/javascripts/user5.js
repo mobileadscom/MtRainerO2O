@@ -200,6 +200,14 @@ var user = {
 			return axios.get(url);
 		}
 	},
+	trackError: function(source) {
+		if (window.location.hostname.indexOf('localhost') < 0) {
+			var url = trackingUrl.replace('{{type}}', 'no_support').replace('{{value}}', '').replace('{{userId}}', '').replace('{{source}}', 'MtRainier');
+			url += '&tt=E&ty=E';
+			// console.log(url);
+			return axios.get(url);
+		}
+	},
 	passResult: function(userId, flag, source, couponLink) { // flag: 1 = win, 0 = lose
 		var psForm = new FormData();
 		psForm.append('user_id', userId);
