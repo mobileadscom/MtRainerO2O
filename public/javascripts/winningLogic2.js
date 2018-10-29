@@ -1,15 +1,11 @@
 var winningLogic = {
 	winLogic: {
-    '1': {
-      value: 'a1',
-      priority: [4]
-    },
     '2': {
-      value: ['a3', 'a4', 'a5'],
+      value: ['a3', 'a4', 'a5', 'a6'],
       priority: [3, 3, 3]
     },
     '3': {
-      value: ['a1', 'a2', 'a3', 'a4'],
+      value: ['a1', 'a2', 'a3'],
       priority: [2, 2, 2, 2]
     },
     '4': {
@@ -63,7 +59,7 @@ var winningLogic = {
       var actualResult = 'lose' // result to be stored to db via /mark_user, also shown in result page
       var couponInfo = {};
 
-      if (this.eligibility.length < 4) { // must answer q1 to q4 all correctly
+      if (this.eligibility.length < 3) { // must answer q2 to q4 all correctly
         winPrio = losePrio
       }
 

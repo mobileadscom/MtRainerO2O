@@ -68,6 +68,8 @@
             </ul>
           </div>
           <br>発券されるクーポン券面の注意事項もお読みくださいますようお願い申し上げます。
+          <br><br><span style="color: #603608;">よくあるご質問：</span>
+            <br><a href="https://www.ienomistyle.com/inquiry" target="_blank"><span style="font-weight: 500;">https://www.ienomistyle.com/inquiry</span></a>
           <br><br><span style="color: #603608;font-weight: 600;">キャンペーン事務局：</span>
             <br>株式会社コンテンツブレイン
             <br>サポート対応時間：10:00-18:00 （土・日・祝日を除く）
@@ -84,7 +86,7 @@
     <div id="surveyPage" style="display: none;">
       <span style="color: #0193DD; font-size: 16px;">アンケートに答えて商品をGet!
       <br>抽選で50,000名様に商品をプレゼント</span>
-      <br><br><a href="https://s3.amazonaws.com/rmarepo/o2o/MtRainier/index.html" style="font-size: 14px;">https://s3.amazonaws.com/rmarepo/o2o/MtRainier/index.html</a>
+      <br><br><a href="https://couponcampaign.ienomistyle.com/MtRainier/" style="font-size: 14px;">https://couponcampaign.ienomistyle.com/MtRainier</a>
     </div>
     <div id="loserPage" style="display: none;">
       <div id="resultTitle" style="color: red;">残念！</div>
@@ -134,8 +136,8 @@ function trackCouponView(userId, couponCode, source) {
 }
 
 function showCouponCode(couponCode, source, logic) {
-  // document.getElementById('couponNumber').innerHTML = couponCode;
-  document.getElementById('couponNumber').innerHTML = logic + '-' + couponCode;
+  document.getElementById('couponNumber').innerHTML = couponCode;
+  // document.getElementById('couponNumber').innerHTML = logic + '-' + couponCode;
   document.getElementById('loadingPage').style.display = 'none';
   document.getElementById('couponPage').style.display = 'block';
 }

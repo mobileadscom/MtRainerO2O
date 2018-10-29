@@ -38,7 +38,8 @@ var app = {
 		  return query_string;
 	},
 	generateCouponLink(userId, source) {
-		return 'https://s3.amazonaws.com/rmarepo/o2o/MtRainier/coupon.html?userId=' + userId + '&source=' + source;
+		return 'https://couponcampaign.ienomistyle.com/MtRainier/coupon.html?userId=' + userId + '&source=' + source;
+		// return 'https://s3.amazonaws.com/rmarepo/o2o/MtRainier/coupon.html?userId=' + userId + '&source=' + source;
 	},
 	initResult(state, couponLink) {
 		if (state == 'win') {
@@ -213,7 +214,7 @@ var app = {
 				if (response.data.status == true) {
 					user.trackRegister(email, this.params.source, 'email');
 					this.formSections.toPage('doneSec');
-					var emailContent = '<head><meta charset="utf-8"></head>ご登録ありがとうございました。下記にあるリンクをクリックしてください。その後キャンペーンへの参加をお願いします<br><br><a href="https://s3.amazonaws.com/rmarepo/o2o/MtRainier/index.html?userId=' + email + '" target="_blank">https://s3.amazonaws.com/rmarepo/o2o/MtRainier/index.html?userId=' + email + '</a><br><br>ienomistyle キャンペーン事務局<br><br>※このメールの送信アドレスは送信専用でございます。返信いただいても対応は致しかねますのであらかじめご了承ください。';
+					var emailContent = '<head><meta charset="utf-8"></head>ご登録ありがとうございました。下記にあるリンクをクリックしてください。その後キャンペーンへの参加をお願いします<br><br><a href="https://couponcampaign.ienomistyle.com/MtRainier/?userId=' + email + '" target="_blank">https://couponcampaign.ienomistyle.com/MtRainier/?userId=' + email + '</a><br><br>ienomistyle キャンペーン事務局<br><br>※このメールの送信アドレスは送信専用でございます。返信いただいても対応は致しかねますのであらかじめご了承ください。';
 					user.sendEmail(email, 'Ienomistyle クーポンキャンペーン', emailContent);
 				}
 				else if (response.data.message == 'user exist.') {
@@ -812,7 +813,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			modal.init();
 		}
 		catch(error) {
-			alert('Browser not supported')
+			alert('本キャンペーンは、下記ブラウザーのみ参加可能です。\n下記ブラウザーにて、ご参加ください。\n(参加可能なブラウザーバージョン)\n\nIE Version 11\nChrome Version 51以上\nFirefox  Version 50以上\nSafari Version 9.1以上\nOpera Version 37以上');
 		}
 		window.q = app.q;
 		window.params = app.params;
