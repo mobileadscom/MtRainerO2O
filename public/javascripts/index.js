@@ -281,16 +281,28 @@ var app = {
     	followBtn.style.display = 'none';
     	user.followTwitter().then((response) => {
 				console.log(response);
-	        if (response.data == 'followed!') {
+	        // if (response.data == 'followed!') {
 	          var sMsg = document.getElementById('successFollow');
 	          sMsg.style.display = 'block';
 	          setTimeout(() => {
 	            this.continue();
 	          }, 2000);
-	        }
+	          if (response.data == 'followed!') {
+	          	user.trackPageView('follow_success', this.params.source);
+	          }
+	          else {
+	          	user.trackPageView('follow_failed', this.params.source);
+	          }
+	        // }
     	}).catch((error) => {
-				console.log(error);
-				followBtn.style.display = 'block';
+    		user.trackPageView('follow_failed', this.params.source);
+    		var sMsg = document.getElementById('successFollow');
+	          sMsg.style.display = 'block';
+	          setTimeout(() => {
+	            this.continue();
+	          }, 2000);
+				// console.log(error);
+				// followBtn.style.display = 'block';
     	});
     }
 
@@ -334,22 +346,22 @@ var app = {
 	  /* ==== Event Listeners End ==== */
 	},
 	checkTwitter: function() { // Check if user is following official page
-		user.isFollowingTwitter().then((resp) => {
-		console.log(resp);
-		if (resp.data == 'following') {
+		// user.isFollowingTwitter().then((resp) => {
+		// console.log(resp);
+		// if (resp.data == 'following') {
 			// user.trackTwitterAlreadyFollow(this.params.source);
-			this.continue();
-	    }
-		else {
+			// this.continue();
+	    // }
+		// else {
 			this.pages.toPage('followPage');
 			user.trackPageView('imp_3', this.params.source);
-	    }
+	    // }
 	    this.changeHeaderImage();
-    }).catch((error) => {
-      console.log(error);
-      document.getElementById('regWorking').style.display = 'none';
-      document.getElementById('regButtons').style.display = 'block';
-    });
+    // }).catch((error) => {
+    //   console.log(error);
+    //   document.getElementById('regWorking').style.display = 'none';
+    //   document.getElementById('regButtons').style.display = 'block';
+    // });
 	},
 	initUser: function(userId, autoRegister, isTwitter) {
 		/* check if user is registered, if no, then register user, if yes, continue on where the user left off */
