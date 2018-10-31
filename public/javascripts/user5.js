@@ -8,7 +8,8 @@ firebase.initializeApp(firebaseConfig);
 var domain = 'https://www.mobileads.com';
 var apiDomain = 'https://api.mobileads.com';
 
-var functionsDomain = 'https://us-central1-mtrainier-78bc8.cloudfunctions.net/twitter';
+// var functionsDomain = 'https://us-central1-mtrainier-78bc8.cloudfunctions.net/twitter';
+var functionsDomain = 'https://us-central1-mt-rainier.cloudfunctions.net/twitter';
 
 var localStorageName = 'MtRainier';
 
