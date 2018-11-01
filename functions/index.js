@@ -161,5 +161,37 @@ app.post('/adminLogIn', function(req, res) {
     }
   });
 });*/
+app.post('/getTwitterId', function(req, res) {
+  mobileadsTwit.get('users/lookup', {
+    screen_name: req.body.id
+  }, function(err, data, response) {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    }
+    else {
+      res.json({
+        id:data[0].id_str,
+        screen_name: data[0].screen_name
+      });
+    }
+  })
+});
 
+app.post('/getTwitterName', function(req, res) {
+  mobileadsTwit.get('users/lookup', {
+    user_id: req.body.id
+  }, function(err, data, response) {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    }
+    else {
+      res.json({
+        id:data[0].id_str,
+        screen_name: data[0].screen_name
+      });
+    }
+  })
+});
 exports.twitter = functions.https.onRequest(app);

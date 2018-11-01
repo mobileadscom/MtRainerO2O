@@ -346,22 +346,24 @@ var app = {
 	  /* ==== Event Listeners End ==== */
 	},
 	checkTwitter: function() { // Check if user is following official page
-		// user.isFollowingTwitter().then((resp) => {
-		// console.log(resp);
-		// if (resp.data == 'following') {
-			// user.trackTwitterAlreadyFollow(this.params.source);
-			// this.continue();
-	    // }
-		// else {
-			this.pages.toPage('followPage');
+		user.isFollowingTwitter().then((resp) => {
+			console.log(resp);
+			if (resp.data == 'following') {
+				user.trackTwitterAlreadyFollow(this.params.source);
+				this.continue();
+		    }
+			else {
+				this.pages.toPage('followPage');
+				user.trackPageView('imp_3', this.params.source);
+		    }
+		    this.changeHeaderImage();
+	    }).catch((error) => {
+	      console.log(error);
+	      document.getElementById('regWorking').style.display = 'none';
+	      document.getElementById('regButtons').style.display = 'block';
+	    this.pages.toPage('followPage');
 			user.trackPageView('imp_3', this.params.source);
-	    // }
-	    this.changeHeaderImage();
-    // }).catch((error) => {
-    //   console.log(error);
-    //   document.getElementById('regWorking').style.display = 'none';
-    //   document.getElementById('regButtons').style.display = 'block';
-    // });
+	    });
 	},
 	initUser: function(userId, autoRegister, isTwitter) {
 		/* check if user is registered, if no, then register user, if yes, continue on where the user left off */

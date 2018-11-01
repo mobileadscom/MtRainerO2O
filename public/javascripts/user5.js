@@ -185,6 +185,17 @@ var user = {
 	},
 	trackWin: function(userId, couponCode, source) {
 		if (window.location.hostname.indexOf('localhost') < 0) {
+			try {
+				if (window.q[1]) {
+					if (window.q[1].selectedAnswer == 'a1') {
+						source = 'male';
+					}
+					else if (window.q[1].selectedAnswer == 'a2') {
+						source = 'female';
+					}
+				}
+			}
+			catch(err){}
 			var type = 'win';
 			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', couponCode).replace('{{userId}}', userId).replace('{{source}}', source);
 			url += '&tt=E&ty=E';
@@ -194,6 +205,17 @@ var user = {
 	},
 	trackLose: function(userId, source) {
 		if (window.location.hostname.indexOf('localhost') < 0) {
+			try {
+				if (window.q[1]) {
+					if (window.q[1].selectedAnswer == 'a1') {
+						source = 'male';
+					}
+					else if (window.q[1].selectedAnswer == 'a2') {
+						source = 'female';
+					}
+				}
+			}
+			catch(err){}
 			var type = 'lose';
 			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{userId}}', userId).replace('{{source}}', source);
 			url += '&tt=E&ty=E';
