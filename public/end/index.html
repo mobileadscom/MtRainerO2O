@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+	<script type="text/javascript">
+		function queryParams() {
+			  var query_string = {};
+			  var query = window.location.search.substring(1);
+			  var vars = query.split("&");
+			  for (var i=0;i<vars.length;i++) {
+			      var pair = vars[i].split("=");
+			      // If first entry with this name
+			      if (typeof query_string[pair[0]] === "undefined") {
+			          query_string[pair[0]] = pair[1];
+			      // If second entry with this name
+			      } else if (typeof query_string[pair[0]] === "string") {
+			          var arr = [ query_string[pair[0]], pair[1] ];
+			          query_string[pair[0]] = arr;
+			      // If third or later entry with this name
+			      } else {
+			          query_string[pair[0]].push(pair[1]);
+			      }
+			  } 
+			  return query_string;
+		}
+		
+		function getRndInteger(min, max) {
+		    return Math.floor(Math.random() * (max - min) ) + min;
+		}
+		
+		// function generatePageLoadId() {
+			window.pgId = Date.now().toString() + getRndInteger(10, 99).toString();
+		
+
+		// imp tracker
+		var qparams = queryParams();
+		var campaignId = '95953d6d8279e4a0be1ee8ba34d3cbe7';
+		var adUserId = '4831';
+		var rmaId = '4';
+		var generalUrl = 'https://track.richmediaads.com/a/analytic.htm?rmaId={{rmaId}}&domainId=0&pageLoadId={{cb}}&userId={{adUserId}}&pubUserId=0&campaignId={{campaignId}}&callback=trackSuccess&type={{type}}&value={{value}}&uniqueId={{userId}}&customId={{source}}';
+		var trackingUrl = generalUrl.replace('{{rmaId}}', rmaId).replace('{{campaignId}}', campaignId).replace('{{adUserId}}', adUserId).replace('{{cb}}', pgId);
+	    var pixel = document.createElement('img');
+	    var type = 'imp_7'
+	    var src = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{userId}}','').replace('{{source}}', 'MtRainier')
+	   /* if (window.location.hostname.indexOf('localhost') > -1) {
+		    console.log(src);
+		}
+		else {
+			pixel.src = src;
+			document.head.appendChild(pixel);
+		}*/
+		    
+	</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KPGXXHN');</script>
+<!-- End Google Tag Manager -->
+  <title>マウントレーニア マイスターズラテ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+</head>
+<body>
+	<noscript>
+		<img src="https://track.richmediaads.com/a/analytic.htm?rmaId=4&domainId=0&pageLoadId=12345&userId=4831&pubUserId=0&campaignId=95953d6d8279e4a0be1ee8ba34d3cbe7&callback=trackSuccess&type=imp_nojs&value=&uniqueId=&customId="  border="0" width="0x" height="0" style="display:none;visibility:hidden"/>
+	</noscript>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KPGXXHN"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  <header>
+  	<div class="banner" id="banner">
+		<img src="img/header-new-3.png" />
+  	</div>
+  </header>
+  <div>
+    <div id="endPage">
+        <div class="msg-wrapper">
+          本キャンペーンは終了いたしました。
+          <br><br>多くの方にご参加頂き
+          <br>ありがとうございました。
+        </div>
+    </div>
+  </div>
+</body>
+</html>
+
+<style type="text/css">
+	@media( min-width: 1px) {
+  .banner {
+    height: 65px;
+  }
+}
+
+
+@media( min-width: 996px) {
+  .banner {
+    height: 90px;
+  }
+}
+
+.banner {
+  width: 100%;
+  background-color: white;
+  text-align: left;
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.banner img {
+  height: 100%;
+  display: block;
+  margin: auto;
+}
+
+body {
+  margin: 0px;
+  text-align: center;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: Arial;
+}
+
+#endPage {
+  font-weight: 600;
+  margin-top: 15px;
+  padding: 0px 20px;
+  text-align: center;
+}
+</style>

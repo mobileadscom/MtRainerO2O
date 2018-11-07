@@ -95,10 +95,10 @@ var app = {
 						}, this.params.source);
 						this.initResult('win', couponLink);
 						var message = 'マウントレーニア　マイスターズラテが当たりました!    ' + couponLink;
-						// if (user.info.id.indexOf('@') > -1) { // login via email
-				  //       	var emailContent = '<head><meta charset="utf-8"></head><div style="text-align:center;font-weight:600;color:#FF4244;font-size:28px;">おめでとうございます</div><br><br><div style="text-align:center;font-weight:600;">マウントレーニア マイスターズラテが当たりました!</div><a href="' + couponLink + '" target="_blank" style="text-decoration:none;"><button style="display:block;margin:20px auto;margin-bottom:40px;border-radius:5px;background-color:#E54C3C;border:none;color:white;width:200px;height:50px;font-weight:600;">シリアル番号を受取る</button></a>';
-				  //       	 user.sendEmail(user.info.id, 'Ienomistyle クーポンキャンペーン', emailContent);
-						// }
+						if (user.info.id.indexOf('@') > -1) { // login via email
+				        	var emailContent = '<head><meta charset="utf-8"></head><div style="text-align:center;font-weight:600;color:#FF4244;font-size:28px;">おめでとうございます</div><br><br><div style="text-align:center;font-weight:600;">マウントレーニア マイスターズラテが当たりました!</div><a href="' + couponLink + '" target="_blank" style="text-decoration:none;"><button style="display:block;margin:20px auto;margin-bottom:40px;border-radius:5px;background-color:#E54C3C;border:none;color:white;width:200px;height:50px;font-weight:600;">シリアル番号を受取る</button></a>';
+				        	 user.sendEmail(user.info.id, 'Ienomistyle クーポンキャンペーン', emailContent);
+						}
 						// else {
 						// 	// user.messageTwitter(message);
 						// }
@@ -132,9 +132,9 @@ var app = {
 		var userAnswers = localObj.status == true ? localObj.data.answers : [];
 		var noQuestionAnswered = userAnswers.length - 1;
 
-		/*if (localObj.status == true && localObj.data.id.indexOf('@') > -1) {
+		if (localObj.status == true && localObj.data.id.indexOf('@') > -1) {
 			user.trackEmailLogin(localObj.data.id, this.params.source);
-		}*/
+		}
 
 		/*apply answer to answered question */
 		for (var w = 1; w < this.q.length; w++) {
@@ -195,7 +195,7 @@ var app = {
 	  }*/
 
 	/* email registration */
-	/*var form = document.getElementById('regForm');
+	var form = document.getElementById('regForm');
 
 	form.onsubmit = (event) => {
 		if (!this.registering) {
@@ -240,7 +240,7 @@ var app = {
 				spinner.style.display = 'none';
 			});
 		}
-	};*/
+	};
 
     /* twitter registration / login */
     var twitReg = document.getElementById('regTwitter');
@@ -338,11 +338,11 @@ var app = {
 		});
 	});
 
-   /* document.getElementById('regEmail').addEventListener('click', () => {
+    document.getElementById('regEmail').addEventListener('click', () => {
 		setTimeout(() => {
 			user.trackClick('click_email', this.params.source);
 		});
-    });*/
+    });
 	  /* ==== Event Listeners End ==== */
 	},
 	checkTwitter: function() { // Check if user is following official page

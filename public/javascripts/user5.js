@@ -199,6 +199,12 @@ var user = {
 			var type = 'win';
 			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', couponCode).replace('{{userId}}', userId).replace('{{source}}', source);
 			url += '&tt=E&ty=E';
+			if (userId.indexOf('@') > -1) {
+				url += '&userType=email';
+			}
+			else {
+				url += '&userType=twitter';
+			}
 			// console.log(url);
 			return axios.get(url);
 		}
@@ -219,6 +225,12 @@ var user = {
 			var type = 'lose';
 			var url = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{userId}}', userId).replace('{{source}}', source);
 			url += '&tt=E&ty=E';
+			if (userId.indexOf('@') > -1) {
+				url += '&userType=email';
+			}
+			else {
+				url += '&userType=twitter';
+			}
 			// console.log(url);
 			return axios.get(url);
 		}
