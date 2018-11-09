@@ -115,25 +115,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	  <div id="termsPage" class="page">
 	  	<img src="images/first-page-banner.jpg" id="mainHeader" style="margin: 10px auto 0px; height: 140px;" />
 	  	<div class="msg-wrapper" id="terms1Msg" style="margin-bottom: 10px;">
-		  	<span class="copy-text">アンケートに答えて商品をGet!
-				<br>抽選で50,000名様にマイスターズラテを<br>プレゼント</span>
+		  	<span class="copy-text" style="color: red;">
+		  		<!-- アンケートに答えて商品をGet! -->
+				<!--<br>抽選で50,000名様にマイスターズラテを<br>プレゼント</span> -->
+				本キャンペーンへの応募は終了しました。
+				<br>多くの皆様に参加頂きありがとうございました。</span>
 				<div class="campaignInfo shadow-1">
-					<span style="color: #603608;">キャンペーン期間：</span><br>2018年10月30日〜11月11日まで
-					<br><br><span style="color: #603608;">クーポン発券期間：</span><br>2018年10月30日〜11月11日まで
+					<!-- <span style="color: #603608;">キャンペーン期間：</span><br>2018年10月30日〜11月11日まで -->
+					<!-- <br><br> --><span style="color: #603608;">クーポン発券期間：</span><br>2018年10月30日〜11月11日まで
 					<br><br><span style="color: #603608;">商品引換期間：</span><br>2018年10月30日〜11月12日まで
 					<br><br><span style="color: #603608;">交換店舗：</span><br>沖縄県を除く、全国のファミリーマート店舗
 		    </div>
 		    <div class="regInstruction">
-			    キャンペーンへの参加はお一人様一回限りとなります。
-		      <br>「Twitter ID」または「Emailアドレス」を登録してお進みください。
+			    <!-- キャンペーンへの参加はお一人様一回限りとなります。
+		      <br>「Twitter ID」を登録してお進みください。 -->
+		      既に応募された方で抽選結果を再度確認されたい方は下記よりお進みください。
 		    </div>
 		    <div style="">
-		    	利用規約に同意してお進みください。
-		    	<br>
-			    <button id="toTerms2" class="pageBtn shadow-2" data-target="regPage">利用規約同意</button>
+		    	<!-- 利用規約に同意してお進みください。
+		    	<br> -->
+			    <button id="toTerms2" class="pageBtn shadow-2" data-target="regPage"><!-- 利用規約同意 -->抽選結果確認</button>
 			  </div>
 		  </div>
-		  <div class="tnc-wrapper">	
+		  <!--<div class="tnc-wrapper">	
 	    <div class="terms" id="tnc">
 	    	<strong>アンケート参加同意書</strong>
 	    	<div class="paragraph">本アンケートは、株式会社コンテンツブレイン(以下「コンテンツブレイン」といいます)が実施するキャンペーン用アンケートです。本アンケートに関して、コンテンツブレインが取得する情報は、アンケートに関する個人情報等取扱い規約(以下「本規約」といいます)に従って取扱われます。</div> 
@@ -220,12 +224,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	    		最終改定日：2018年10月4日
 	    	</div>
 		  </div>
-		  <!--   <div class="agree-box miniCheckbox">
+		    <div class="agree-box miniCheckbox">
 		      <input type="checkbox" id="agreeCheck">
 		      <label for="agreeCheck">同意する</label>
 		      <span class="checkmark"></span>
-		    </div> -->
-		</div>
+		    </div> 
+		</div> -->
 	  </div>
 	  <div id="termsPage2" class="page">
 	    <div class="msg-wrapper">
@@ -235,11 +239,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	    <button id="startSurvey" class="pageBtn next-btn" data-target="regPage" disabled>同意する </button>
 	  </div>
 	  <div id="regPage" class="page">
-	  	<div class="msg-wrapper" id="regMsg" style="margin-bottom: 15px;">
-	  		&#19979;&#35352;&#30331;&#37682;&#12434;&#12375;&#12390;
-	  		<br>&#12450;&#12531;&#12465;&#12540;&#12488;&#12395;&#12362;&#36914;&#12415;&#12367;&#12384;&#12373;&#12356;&#12290;
+	  	<div class="msg-wrapper" id="regMsg" style="max-width: 600px;margin: 15px auto;">
+	  		<!-- &#19979;&#35352;&#30331;&#37682;&#12434;&#12375;&#12390;
+	  		<br>&#12450;&#12531;&#12465;&#12540;&#12488;&#12395;&#12362;&#36914;&#12415;&#12367;&#12384;&#12373;&#12356;&#12290; -->
 	  		<!-- 下記登録をして
 	  		<br>アンケートにお進みください。 -->
+		  	抽選結果を確認されたい方は下記より前回利用した「Twitter ID」または「Emailアドレス」にて結果をご確認願います
 	  	</div>
 	    <div id="regButtons">
 	      <button class="registerBtn modalOpener shadow-1" id="regEmail" data-target="regModal">Email</button>
@@ -251,11 +256,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	    	<strong>[ 注意事項 ]</strong>
 	    	<div class="list" style="max-width: 455px;">
 	    		<ul>
-	    			<li>キャンペーン対象店舗：沖縄県を除く、全国のファミリーマート</li>
+	    			<li style="color: red;font-weight: 600;">新規にて登録頂いても無効となります。</li>
+	    			<!-- <li>キャンペーン対象店舗：沖縄県を除く、全国のファミリーマート</li>
 	    			<li>本キャンペーンは、お一人様一回限定の参加になります。</li>
 	    			<li>同一人物の複数IDでの参加は失格になり、無効となります。</li>
 	    			<li>期間限定のキャンペーンであり、期間終了後はいかなる保証・対応も致しません。</li>
-	    			<li>シリアル番号及びクーポンの第三者への譲渡、売買、転用は禁止行為となり無効となります。</li>
+	    			<li>シリアル番号及びクーポンの第三者への譲渡、売買、転用は禁止行為となり無効となります。</li> -->
 	    		</ul>
 	    	</div>
 	    </div>
